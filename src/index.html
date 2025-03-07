@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../dist/styles/main.min.css">
+    <link rel="stylesheet" href="/dist/styles/main.min.css">
     <title>Document</title>
 </head>
 <body>
@@ -24,8 +24,12 @@
             </div>
         </div>
         <div class="battle-stage">
-            <div id="ally" class="battle-stage__ally"></div>
-            <div id="enemy" class="battle-stage__enemy"></div>
+            <div id="ally" class="battle-stage__ally">
+                <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator">20</span>
+            </div>
+            <div id="enemy" class="battle-stage__enemy">
+                <span id="enemy-damage-indicator" class="battle-stage__enemy__damage-indicator">30</span>
+            </div>
         </div>
         <div class="battle-menu">
             <div class="battle-menu__options">
@@ -34,7 +38,7 @@
                 <button id="group-button" class="battle-menu__options__button">Grupo</button>
                 <button id="log-button" class="battle-menu__options__button">Registro</button>
             </div>
-            <div class="battle-menu__infos">
+            <div id="battle-infos" class="battle-menu__infos">
                 <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys-is--visible">
                     <span class="battle-menu__infos__allys__name">Você</span>
                     <div class="battle-menu__infos__allys__status">
@@ -53,7 +57,7 @@
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name">Soco</span>
                         </div>
-                        <span class="battle-menu__infos__skills__damage">10</span>
+                        <span class="battle-menu__infos__skills__damage">20</span>
                     </button>
 
                     <button id="skill-button" class="battle-menu__infos__skills__container">
@@ -61,7 +65,7 @@
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name">Jab</span>
                         </div>
-                        <span class="battle-menu__infos__skills__damage">20</span>
+                        <span class="battle-menu__infos__skills__damage">30</span>
                     </button>
                 </div>
             </div>

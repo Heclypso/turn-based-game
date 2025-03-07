@@ -44,7 +44,7 @@ class Ally extends Character  {
         allyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
-            ally.style.display = "none";
+            ally.style.opacity = "0";
             console.log("Você perdeu")
         }
     }
@@ -55,14 +55,13 @@ class AllySkills extends Skills {
 
 const enemy = document.getElementById('enemy')
 
-
 class Enemy extends Character {
     updateHpBars() {
         enemyHpBar.style.width = `${(this.getHp()/ this.getMaxHp()) *100}%`;
         enemyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
-            enemy.style.display = "none";
+            enemy.style.opacity = "0";
             console.log("Você ganhou")
         }
     }
@@ -89,21 +88,46 @@ const enemySkillsArray = [enemyPunch, enemyJab]
 // Sistema do player escolher uma skill e atacar com ela
 const allySkillsArray = [allyPunch, allyJab]
 const skill = document.querySelectorAll('#skill-button')
-
+const skillMenu = document.getElementById('skills')
+const allys = document.getElementById('allys')
+const allyDamageIndicator = document.getElementById('ally-damage-indicator')
+const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
-        if (ally.style.display != "none" && enemy.style.display != "none") {
+        if (ally.style.opacity != "0" && enemy.style.opacity != "0") {
+            skills.classList.remove('battle-menu__infos__skills-is--visible')
             protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
             firstEnemy.getAttacked(allySkillsArray[i].damage);
+            enemyDamageIndicator.style.opacity = '1'
+            enemyDamageIndicator.style.bottom = '-30%'
             firstEnemy.updateHpBars();
+            setTimeout(() => {
+                enemyDamageIndicator.style.opacity = '0'
+                setTimeout(() => {
+                    enemyDamageIndicator.style.bottom = '20%'
+                }, 2500);
+            }, 1500);
+         
 
             setTimeout(() => {
-                if(enemy.style.display != "none") {
+                if(enemy.style.opacity != "0") {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                     console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                     protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                    allyDamageIndicator.style.opacity = '1'
+                    allyDamageIndicator.style.right = '-30%'
                     protagonist.updateHpBars();
+                    setTimeout(() => {
+                        allyDamageIndicator.style.opacity = '0'
+                        setTimeout(() => {
+                            allyDamageIndicator.style.right = '0'
+                        }, 2500);
+                    }, 1500);
+                    
+                    
+
+                    allys.classList.add('battle-menu__infos__allys-is--visible')
                 }
             }, 1000);
         }
