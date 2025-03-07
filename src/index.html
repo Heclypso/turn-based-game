@@ -23,13 +23,13 @@
         </div>
         <div class="battle-menu">
             <div class="battle-menu__options">
-                <button class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
-                <button class="battle-menu__options__button">Itens</button>
-                <button class="battle-menu__options__button">Cartas</button>
-                <button class="battle-menu__options__button">Registro</button>
+                <button id="attack-button" class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
+                <button id="itens-button" class="battle-menu__options__button">Itens</button>
+                <button id="group-button" class="battle-menu__options__button">Grupo</button>
+                <button id="log-button" class="battle-menu__options__button">Registro</button>
             </div>
             <div class="battle-menu__infos">
-                <div class="battle-menu__infos__allys">
+                <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys-is--visible">
                     <span class="battle-menu__infos__allys__name">Você</span>
                     <div class="battle-menu__infos__allys__status">
                         <div class="battle-menu__infos__allys__status__container">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 
-                <div class="battle-menu__infos__skills">
+                <div id="skills" class="battle-menu__infos__skills">
                     <div class="battle-menu__infos__skills__container">
                         <div class="battle-menu__infos__skills__main">
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
@@ -60,10 +60,12 @@
                 </div>
             </div>
         </div>
-        <div class="battle-log">
+
+        <div id="log" class="battle-log">
 
         </div>
     </main>
-    <script src="/dist//scripts/index.min.js"></script>
+    <script src="/dist/scripts/index.min.js"></script>
+    <script src="/dist/scripts/navegation.min.js"></script>
 </body>
 </html>

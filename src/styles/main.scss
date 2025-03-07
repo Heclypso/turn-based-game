@@ -114,12 +114,16 @@
             color: variables.$primaryTextColor;
             background-color: variables.$activeTransparentColor;
             border: 1px solid variables.$activeTransparentBorderColor;
-            display: flex;
+            display: none;
             justify-content: space-between;
             padding: 4px;
             border-radius: 4px;
             width: 600px;
             height: 36px;
+
+            &-is--visible {
+                display: flex;
+            }
 
             &__name {
                 margin: 4px;
@@ -153,11 +157,14 @@
 
         &__skills {
             height: 100%;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
             gap: 10px;
-            display: none;
+        
+            &-is--visible {
+                display: flex;
+            }
 
             &__container {
                 width: 240px;
@@ -193,10 +200,14 @@
 
 .battle-log {
     background-color: variables.$primaryColor;
-    display: none;
     width: 505px;
     height: 100%;
     position: absolute;
     top: 0;
     right: 0;
+    display: none;
+
+    &-is--visible {
+        display: flex;
+    }
 }
