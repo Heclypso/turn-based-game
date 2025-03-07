@@ -1,0 +1,202 @@
+@use 'variables'; 
+
+* {
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    // font-size: 18px;
+    // line-height: 21px;
+}
+
+.battle-hud {
+    height: 134px;
+    width: 100%;
+    background-color: variables.$primaryTransparentColor;
+    border: solid 5px variables.$primaryColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &__display {
+        color: variables.$primaryTextColor;
+        font-size: 32px;
+        line-height: 38px;
+        margin-left: -20px;
+    }
+
+    &__timer {
+        color: variables.$primaryTextColor;
+        font-size: 32px;
+        line-height: 38px;
+        position: absolute;
+        top: 158px;
+        left: 24px;
+    }
+}
+
+.battle-stage {
+    background-image: url('https://servidor-estatico-alpha-six.vercel.app/turn-based-game-background.jpg');
+    background-size: cover;
+    width: 1366px;
+    height: 768px;
+
+    &__player {
+        background-color: variables.$playerColor;
+        width: 187px;
+        height: 180px;
+        position: absolute;
+        top: 495px;
+        left: 122px;
+    }
+
+    &__enemy {
+        background-color: variables.$enemyColor;
+        width: 140px;
+        height: 176px;
+        position: absolute;
+        top: 332px;
+        left: 593px;
+        opacity: 1;
+        transition: .5s;
+    }
+}
+
+.battle-menu {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    &__options {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        background-color: variables.$primaryTransparentColor;
+        border: solid 5px variables.$primaryColor;
+        width: 213px;
+        height: 134px;
+
+        &__button {
+            background-color: transparent;
+            border: none;
+            color: variables.$primaryTextColor;
+            font-size: 18px;
+            line-height: 21px;
+            width: 167px;
+            height: 24px;
+            border-radius: 4px;
+
+            &-is--active {
+                background-color: variables.$activeTransparentColor;
+                border: 1px solid variables.$activeTransparentBorderColor;
+            }
+        }
+    }
+
+    &__infos {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: variables.$primaryTransparentColor;
+        border: solid 5px variables.$primaryColor;
+        height: 134px;
+        width: 648px;
+        padding: 20px;
+
+        &__allys {
+            color: variables.$primaryTextColor;
+            background-color: variables.$activeTransparentColor;
+            border: 1px solid variables.$activeTransparentBorderColor;
+            display: flex;
+            justify-content: space-between;
+            padding: 4px;
+            border-radius: 4px;
+            width: 600px;
+            height: 36px;
+
+            &__name {
+                margin: 4px;
+                font-size: 18px;
+                line-height: 21px;
+            }
+
+            &__status {
+
+                &__container {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 115px;
+                    height: 22px;
+                    font-size: 12px;
+                    line-height: 14px;
+                }
+
+                &__hpbar {
+                    margin-top: -6px;
+                    width: 114px;
+                    height: 8px;
+                    background-color: variables.$hpBarEmptyBackgroundColor;
+
+                    &-is--full {
+                        background-color: variables.$hpBarFullBackgroundColor;
+                    }
+                }
+            }
+        }
+
+        &__skills {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            display: none;
+
+            &__container {
+                width: 240px;
+                height: 36px;
+                display: flex;
+                justify-content: space-between;
+                padding: 8px;
+                background-color: variables.$activeTransparentColor;
+                border: 1px solid variables.$activeTransparentBorderColor;
+                border-radius: 4px;
+            }
+
+            &__main{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            &__icon {
+                margin-right: 8px;
+            }
+
+            &__name{
+                color: variables.$primaryTextColor;
+            }
+
+            &__damage{
+                color: variables.$damageIndicatorColor;
+            }
+        }
+    }
+}
+
+.battle-log {
+    background-color: variables.$primaryColor;
+    display: none;
+    width: 505px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
