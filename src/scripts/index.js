@@ -44,7 +44,7 @@ class Ally extends Character  {
         allyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
-            ally.style.opacity = "0";
+            ally.style.opacity = '0';
             console.log("Você perdeu")
         }
     }
@@ -54,6 +54,7 @@ class AllySkills extends Skills {
 }
 
 const enemy = document.getElementById('enemy')
+const enemyInfos = document.getElementById('enemy-infos')
 
 class Enemy extends Character {
     updateHpBars() {
@@ -61,8 +62,10 @@ class Enemy extends Character {
         enemyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
-            enemy.style.opacity = "0";
+            enemy.style.opacity = '0';
+            enemyInfos.style.opacity = '0'
             console.log("Você ganhou")
+            enemyInfos.style.display = 'none'
         }
     }
 }
@@ -120,6 +123,7 @@ for (let i = 0; i < skill.length; i++) {
                     protagonist.updateHpBars();
                     setTimeout(() => {
                         allyDamageIndicator.style.opacity = '0'
+                        ally.style.left = '122px'
                         setTimeout(() => {
                             allyDamageIndicator.style.right = '0'
                         }, 2500);

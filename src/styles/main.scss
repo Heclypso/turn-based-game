@@ -85,6 +85,7 @@
         position: absolute;
         top: 495px;
         left: 122px;
+        transition: .5s;
 
         &__damage-indicator {
             color: variables.$primaryTextColor;
