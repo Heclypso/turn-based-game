@@ -10,16 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- <button id="button" type="button">Punch</button>
-    <button id="button" type="button">jab</button> -->
     <main>
         <div class="battle-hud">
             <div class="battle-hud__display">Inimigo [inimigo]</div>
             <span class="battle-hud__timer">00:01:00</span>
+            <div class="battle-hud__infos">
+                <div class="battle-hud__infos__container">
+                    <span>HP</span><span id="enemy-hp-number">100</span>
+                </div>
+                <div class="battle-hud__infos__hpbar">
+                    <div id="enemy-hp-bar" class="battle-hud__infos__hpbar battle-hud__infos__hpbar-is--full"></div>
+                </div>
+            </div>
         </div>
         <div class="battle-stage">
-            <div class="battle-stage__player"></div>
-            <div class="battle-stage__enemy"></div>
+            <div id="ally" class="battle-stage__ally"></div>
+            <div id="enemy" class="battle-stage__enemy"></div>
         </div>
         <div class="battle-menu">
             <div class="battle-menu__options">
@@ -33,30 +39,30 @@
                     <span class="battle-menu__infos__allys__name">Você</span>
                     <div class="battle-menu__infos__allys__status">
                         <div class="battle-menu__infos__allys__status__container">
-                            <span>HP</span><span>100</span>
+                            <span>HP</span><span id="ally-hp-number">100</span>
                         </div>
                         <div class="battle-menu__infos__allys__status__hpbar">
-                            <div class="battle-menu__infos__allys__status__hpbar battle-menu__infos__allys__status__hpbar-is--full"></div>
+                            <div id="ally-hp-bar" class="battle-menu__infos__allys__status__hpbar battle-menu__infos__allys__status__hpbar-is--full"></div>
                         </div>
                     </div>
                 </div>
                 
                 <div id="skills" class="battle-menu__infos__skills">
-                    <div class="battle-menu__infos__skills__container">
+                    <button id="skill-button" class="battle-menu__infos__skills__container">
                         <div class="battle-menu__infos__skills__main">
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name">Soco</span>
                         </div>
                         <span class="battle-menu__infos__skills__damage">10</span>
-                    </div>
+                    </button>
 
-                    <div class="battle-menu__infos__skills__container">
-                        <div class="battle-menu__infos__skills__main">
+                    <button id="skill-button" class="battle-menu__infos__skills__container">
+                        <div id="skill-button" class="battle-menu__infos__skills__main">
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name">Jab</span>
                         </div>
                         <span class="battle-menu__infos__skills__damage">20</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

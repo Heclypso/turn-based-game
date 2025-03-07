@@ -1,4 +1,11 @@
+const allyHpBar = document.getElementById('ally-hp-bar')
+const allyHpValue = document.getElementById('ally-hp-number')
+
+const enemyHpBar = document.getElementById('enemy-hp-bar')
+const enemyHpValue = document.getElementById('enemy-hp-number')
+
 class Character {
+    #maxHp = 100;
     #hp = 100;
 
     constructor(characterName, characterSkills) {
@@ -12,7 +19,12 @@ class Character {
         this.#hp -= enemyDamage;
     }
     getHp() {
-        console.log(`A vida atual do ${this.name} é de ${this.#hp}`)
+        return this.#hp;
+    }
+    getMaxHp() {
+        return this.#maxHp;
+    }
+    updateHpBars() {
     }
 }
 
@@ -24,13 +36,36 @@ class Skills {
     }
 }
 
+const ally = document.getElementById('ally')
+
 class Ally extends Character  {
+    updateHpBars() {
+        allyHpBar.style.width = `${(this.getHp()/ this.getMaxHp()) *100}%`;
+        allyHpValue.innerHTML = this.getHp();
+
+        if (this.getHp() <= 0) {
+            ally.style.display = "none";
+            console.log("Você perdeu")
+        }
+    }
 }
 
 class AllySkills extends Skills {
 }
 
+const enemy = document.getElementById('enemy')
+
+
 class Enemy extends Character {
+    updateHpBars() {
+        enemyHpBar.style.width = `${(this.getHp()/ this.getMaxHp()) *100}%`;
+        enemyHpValue.innerHTML = this.getHp();
+
+        if (this.getHp() <= 0) {
+            enemy.style.display = "none";
+            console.log("Você ganhou")
+        }
+    }
 }
 
 class EnemySkills extends Skills {
@@ -50,25 +85,28 @@ const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
 
 // Seleção de skill aleatoria para o inimigo (computador) atacar.
 const enemySkillsArray = [enemyPunch, enemyJab]
-const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
 
 // Sistema do player escolher uma skill e atacar com ela
 const allySkillsArray = [allyPunch, allyJab]
-const buttons = document.querySelectorAll('#button')
+const skill = document.querySelectorAll('#skill-button')
 
-firstEnemy.getHp();
-protagonist.getHp();
 
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', function(){
+for (let i = 0; i < skill.length; i++) {
+    skill[i].addEventListener('click', function(){
+        if (ally.style.display != "none" && enemy.style.display != "none") {
             protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
             firstEnemy.getAttacked(allySkillsArray[i].damage);
-            firstEnemy.getHp();
+            firstEnemy.updateHpBars();
 
             setTimeout(() => {
-                protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
-                protagonist.getHp()
+                if(enemy.style.display != "none") {
+                    const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
+                    console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
+                    protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                    protagonist.updateHpBars();
+                }
             }, 1000);
+        }
     })
 }
 
