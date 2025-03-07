@@ -64,8 +64,10 @@ class Enemy extends Character {
         if (this.getHp() <= 0) {
             enemy.style.opacity = '0';
             enemyInfos.style.opacity = '0'
-            console.log("Você ganhou")
-            enemyInfos.style.display = 'none'
+            setTimeout(() => {
+                console.log("Você ganhou")
+                enemyInfos.style.display = 'none'
+            }, 1000);
         }
     }
 }
