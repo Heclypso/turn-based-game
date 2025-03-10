@@ -54,6 +54,7 @@ class AllySkills extends Skills {
 }
 
 const enemy = document.getElementById('enemy')
+const enemyName = document.getElementById('enemy-name')
 const enemyInfos = document.getElementById('enemy-infos')
 
 class Enemy extends Character {
@@ -67,6 +68,9 @@ class Enemy extends Character {
             setTimeout(() => {
                 console.log("Você ganhou")
                 enemyInfos.style.display = 'none'
+                setTimeout(() => {
+                    enemyName.style.opacity = '0'
+                }, 1000);
             }, 1000);
         }
     }
@@ -116,6 +120,25 @@ function changeTimerInnerText() {
             clearInterval(timeCounter)
             document.getElementById('timer').innerText = ''
             console.log("Turno finalizado")
+            if(enemy.style.opacity != "0") {
+                const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
+                console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
+                protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
+                allyDamageIndicator.style.opacity = '1'
+                allyDamageIndicator.style.right = '-30%'
+                protagonist.updateHpBars();
+                setTimeout(() => {
+                    allyDamageIndicator.style.opacity = '0'
+                    ally.style.left = '122px'
+                    changeTimerInnerText()
+                    setTimeout(() => {
+                        allyDamageIndicator.style.right = '0'
+                    }, 2500);
+                }, 1500);
+                
+                allys.classList.add('battle-menu__infos__allys-is--visible')
+            }
         }
     }, 1000);
 }
@@ -132,6 +155,7 @@ const skillMenu = document.getElementById('skills')
 const allys = document.getElementById('allys')
 const allyDamageIndicator = document.getElementById('ally-damage-indicator')
 const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
+const skills = document.getElementById('skills')
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
