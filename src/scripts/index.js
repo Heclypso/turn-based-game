@@ -51,6 +51,16 @@ class Ally extends Character  {
 }
 
 class AllySkills extends Skills {
+    static instances = []; // A palavra-chave static em JavaScript é usada para definir propriedades ou métodos que pertencem à classe e não às instâncias da classe
+
+    constructor(skillName, skillDamage, skillCost) {
+        super(skillName, skillDamage, skillCost);  
+        AllySkills.instances.push(this);
+    }
+
+    static getAllInstances() {
+        return AllySkills.instances
+    }
 }
 
 const enemy = document.getElementById('enemy')
@@ -83,6 +93,18 @@ class EnemySkills extends Skills {
 // Definição das instancias de habilidades dos personagens
 const allyPunch = new AllySkills('Punch', 20, 10);
 const allyJab = new AllySkills('Jab', 30, 10)
+
+// Atualiza o dano das skills e o nome delas na barra inferior
+
+const skillsName = document.querySelectorAll('.battle-menu__infos__skills__name')
+const skillsDamage = document.querySelectorAll('.battle-menu__infos__skills__damage')
+
+for (let i = 0; i < AllySkills.instances.length; i++) {
+    skillsName[i].innerText = AllySkills.instances[i].name;
+    skillsDamage[i].innerText = AllySkills.instances[i].damage;
+}
+
+// Definição das habilidades da CPU
 
 const enemyPunch = new EnemySkills('Punch', 20, 10);
 const enemyJab = new EnemySkills('Jab', 30, 10)
@@ -120,7 +142,8 @@ function changeTimerInnerText() {
             clearInterval(timeCounter)
             document.getElementById('timer').innerText = ''
             console.log("Turno finalizado")
-            if(enemy.style.opacity != "0") {
+
+            if(enemy.style.opacity === "1") {
                 const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                 console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                 protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
@@ -136,7 +159,7 @@ function changeTimerInnerText() {
                         allyDamageIndicator.style.right = '0'
                     }, 2500);
                 }, 1500);
-                
+            
                 allys.classList.add('battle-menu__infos__allys-is--visible')
             }
         }
