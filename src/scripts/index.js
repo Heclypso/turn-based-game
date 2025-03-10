@@ -139,6 +139,7 @@ for (let i = 0; i < skill.length; i++) {
             skills.classList.remove('battle-menu__infos__skills-is--visible')
             protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
             firstEnemy.getAttacked(allySkillsArray[i].damage);
+            enemyDamageIndicator.innerHTML = `${allySkillsArray[i].damage}`
             enemyDamageIndicator.style.opacity = '1'
             enemyDamageIndicator.style.bottom = '-30%'
             firstEnemy.updateHpBars();
@@ -154,6 +155,7 @@ for (let i = 0; i < skill.length; i++) {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                     console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                     protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                    allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
                     allyDamageIndicator.style.opacity = '1'
                     allyDamageIndicator.style.right = '-30%'
                     protagonist.updateHpBars();
