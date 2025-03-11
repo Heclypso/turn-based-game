@@ -111,7 +111,7 @@ const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
 function changeTimerInnerText() {
     const now = new Date()
     const turnStart = now.getTime()
-    const turnEnd = turnStart + 1000 * 62;  
+    const turnEnd = turnStart + 1000 * 5;  
     
     const timeCounter = setInterval(function(){
         const now = new Date()
@@ -136,7 +136,7 @@ function changeTimerInnerText() {
             document.getElementById('timer').innerText = ''
             console.log("Turno finalizado")
 
-            if(enemy.style.opacity === "1") {
+            if(enemy.style.opacity = "1") {
                 const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                 console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                 protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
