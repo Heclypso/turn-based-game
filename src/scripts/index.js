@@ -109,54 +109,55 @@ const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
 
 // Sistema de duração do turno
 function changeTimerInnerText() {
-    const now = new Date()
-    const turnStart = now.getTime()
-    const turnEnd = turnStart + 1000 * 5;  
-    
-    const timeCounter = setInterval(function(){
+    if (protagonist.getHp() > 0) {
         const now = new Date()
         const turnStart = now.getTime()
+        const turnEnd = turnStart + 1000 * 62;  
         
-        const minsInMs = 1000 * 60;
-        const secondsInMs = 1000;
-    
-        const timeLeftToEndTheTurn = turnEnd - turnStart;
-        
-        const minsToEndTheTurn = Math.floor((timeLeftToEndTheTurn /  (minsInMs)))
-        const secondsToEndTheTurn = Math.floor((timeLeftToEndTheTurn % minsInMs) / secondsInMs) 
-    
-        document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:${secondsToEndTheTurn}`
-    
-        if(secondsToEndTheTurn < 10) {
-            document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
-        }
-    
-        if (timeLeftToEndTheTurn < 0 || enemyDamageIndicator.style.opacity === '1') {
-            clearInterval(timeCounter)
-            document.getElementById('timer').innerText = ''
-            console.log("Turno finalizado")
-
-            if(enemy.style.opacity = "1") {
-                const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
-                console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
-                protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
-                allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
-                allyDamageIndicator.style.opacity = '1'
-                allyDamageIndicator.style.right = '-30%'
-                protagonist.updateHpBars();
-                setTimeout(() => {
-                    allyDamageIndicator.style.opacity = '0'
-                    ally.style.left = '122px'
-                    changeTimerInnerText()
-                    setTimeout(() => {
-                        allyDamageIndicator.style.right = '0'
-                    }, 2500);
-                }, 1500);
+        const timeCounter = setInterval(function(){
+            const now = new Date()
+            const turnStart = now.getTime()
             
-                allys.classList.add('battle-menu__infos__allys-is--visible')
+            const minsInMs = 1000 * 60;
+            const secondsInMs = 1000;
+        
+            const timeLeftToEndTheTurn = turnEnd - turnStart;
+            
+            const minsToEndTheTurn = Math.floor((timeLeftToEndTheTurn /  (minsInMs)))
+            const secondsToEndTheTurn = Math.floor((timeLeftToEndTheTurn % minsInMs) / secondsInMs) 
+        
+            document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:${secondsToEndTheTurn}`
+        
+            if(secondsToEndTheTurn < 10) {
+                document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
             }
-        }
-    }, 1000);
+        
+            if (timeLeftToEndTheTurn < 0 || enemyDamageIndicator.style.opacity == '1') {
+                clearInterval(timeCounter)
+                document.getElementById('timer').innerText = ''
+
+                if(firstEnemy.getHp() > 0 && protagonist.getHp() > 0) {
+                    const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
+                    console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
+                    protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                    allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
+                    allyDamageIndicator.style.opacity = '1'
+                    allyDamageIndicator.style.right = '-30%'
+                    protagonist.updateHpBars();
+                    setTimeout(() => {
+                        allyDamageIndicator.style.opacity = '0'
+                        ally.style.left = '122px'
+                        changeTimerInnerText()
+                        setTimeout(() => {
+                            allyDamageIndicator.style.right = '0'
+                        }, 2500);
+                    }, 1500);
+                
+                    allys.classList.add('battle-menu__infos__allys-is--visible')
+                }
+            }
+        }, 1000);
+    }
 }
 
 changeTimerInnerText()
@@ -175,7 +176,7 @@ const skills = document.getElementById('skills')
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
-        if (ally.style.opacity != "0" && enemy.style.opacity != "0" && document.getElementById('timer').innerText != '') {
+        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
             skills.classList.remove('battle-menu__infos__skills-is--visible')
             protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
             firstEnemy.getAttacked(allySkillsArray[i].damage);
@@ -189,28 +190,6 @@ for (let i = 0; i < skill.length; i++) {
                     enemyDamageIndicator.style.bottom = '20%'
                 }, 2500);
             }, 1500);
-
-            setTimeout(() => {
-                if(enemy.style.opacity != "0") {
-                    const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
-                    console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
-                    protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
-                    allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
-                    allyDamageIndicator.style.opacity = '1'
-                    allyDamageIndicator.style.right = '-30%'
-                    protagonist.updateHpBars();
-                    setTimeout(() => {
-                        allyDamageIndicator.style.opacity = '0'
-                        ally.style.left = '122px'
-                        changeTimerInnerText()
-                        setTimeout(() => {
-                            allyDamageIndicator.style.right = '0'
-                        }, 2500);
-                    }, 1500);
-                    
-                    allys.classList.add('battle-menu__infos__allys-is--visible')
-                }
-            }, 1000);
         }
     })
 }
