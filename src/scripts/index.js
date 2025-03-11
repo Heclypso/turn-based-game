@@ -107,9 +107,44 @@ const enemyJab = new EnemySkills('Jab', 30, 10)
 const protagonist = new Ally('Protagonist', [allyPunch, allyJab]);
 const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
 
-// Sistema de duração do turno
+// Seleção de skill aleatoria para o inimigo (computador) atacar.
+const enemySkillsArray = [enemyPunch, enemyJab]
+
+// Sistema do player escolher uma skill e atacar com ela
+const allySkillsArray = [allyPunch, allyJab]
+const skill = document.querySelectorAll('#skill-button')
+const skillMenu = document.getElementById('skills')
+const allys = document.getElementById('allys')
+const allyDamageIndicator = document.getElementById('ally-damage-indicator')
+const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
+const skills = document.getElementById('skills')
+
+let cpuCanAttack = false;
+for (let i = 0; i < skill.length; i++) {
+    skill[i].addEventListener('click', function(){
+        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
+            skills.classList.remove('battle-menu__infos__skills-is--visible')
+            protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
+            firstEnemy.getAttacked(allySkillsArray[i].damage);
+            enemyDamageIndicator.innerHTML = `${allySkillsArray[i].damage}`
+            enemyDamageIndicator.style.opacity = '1'
+            enemyDamageIndicator.style.bottom = '-30%'
+            firstEnemy.updateHpBars();
+            cpuCanAttack = true;
+            setTimeout(() => {
+                enemyDamageIndicator.style.opacity = '0'
+                setTimeout(() => {
+                    enemyDamageIndicator.style.bottom = '20%'
+                }, 2500);
+            }, 1500);
+        }
+    })
+}
+
+
+// Sistema de duração do turno e ataque da CPU
 function changeTimerInnerText() {
-    if (protagonist.getHp() > 0) {
+    if (protagonist.getHp() > 0  && enemyDamageIndicator.style.bottom != '20%') {
         const now = new Date()
         const turnStart = now.getTime()
         const turnEnd = turnStart + 1000 * 62;  
@@ -132,7 +167,7 @@ function changeTimerInnerText() {
                 document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
             }
         
-            if (timeLeftToEndTheTurn < 0 || enemyDamageIndicator.style.opacity == '1') {
+            if (timeLeftToEndTheTurn < 0 || cpuCanAttack == true) {
                 clearInterval(timeCounter)
                 document.getElementById('timer').innerText = ''
 
@@ -144,13 +179,14 @@ function changeTimerInnerText() {
                     allyDamageIndicator.style.opacity = '1'
                     allyDamageIndicator.style.right = '-30%'
                     protagonist.updateHpBars();
+                    cpuCanAttack = false;
                     setTimeout(() => {
                         allyDamageIndicator.style.opacity = '0'
                         ally.style.left = '122px'
-                        changeTimerInnerText()
                         setTimeout(() => {
                             allyDamageIndicator.style.right = '0'
-                        }, 2500);
+                            changeTimerInnerText()
+                        }, 500);
                     }, 1500);
                 
                     allys.classList.add('battle-menu__infos__allys-is--visible')
@@ -161,36 +197,3 @@ function changeTimerInnerText() {
 }
 
 changeTimerInnerText()
-
-// Seleção de skill aleatoria para o inimigo (computador) atacar.
-const enemySkillsArray = [enemyPunch, enemyJab]
-
-// Sistema do player escolher uma skill e atacar com ela
-const allySkillsArray = [allyPunch, allyJab]
-const skill = document.querySelectorAll('#skill-button')
-const skillMenu = document.getElementById('skills')
-const allys = document.getElementById('allys')
-const allyDamageIndicator = document.getElementById('ally-damage-indicator')
-const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
-const skills = document.getElementById('skills')
-
-for (let i = 0; i < skill.length; i++) {
-    skill[i].addEventListener('click', function(){
-        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
-            skills.classList.remove('battle-menu__infos__skills-is--visible')
-            protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
-            firstEnemy.getAttacked(allySkillsArray[i].damage);
-            enemyDamageIndicator.innerHTML = `${allySkillsArray[i].damage}`
-            enemyDamageIndicator.style.opacity = '1'
-            enemyDamageIndicator.style.bottom = '-30%'
-            firstEnemy.updateHpBars();
-            setTimeout(() => {
-                enemyDamageIndicator.style.opacity = '0'
-                setTimeout(() => {
-                    enemyDamageIndicator.style.bottom = '20%'
-                }, 2500);
-            }, 1500);
-        }
-    })
-}
-
