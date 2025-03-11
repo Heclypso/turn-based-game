@@ -7,6 +7,7 @@ const skills = document.getElementById('skills')
 const enemy = document.getElementById('enemy')
 const ally = document.getElementById('ally')
 
+const attackButton = document.getElementById('attack-button')
 const itensButton = document.getElementById('itens-button')
 const groupButton = document.getElementById('group-button')
 const logButton = document.getElementById('log-button')
@@ -16,6 +17,8 @@ for (let i = 0; i < buttons.length; i++) {
         if (enemy.style.opacity != '0' && ally.style.opacity != '0') {
         switch(buttons[i].id) {
             case ('attack-button'): 
+                removeAtiveOptions()
+                attackButton.classList.add('battle-menu__options__button-is--active')
                 allys.classList.remove('battle-menu__infos__allys-is--visible')
                 skills.classList.add('battle-menu__infos__skills-is--visible')
             break;
