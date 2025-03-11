@@ -51,15 +51,11 @@ class Ally extends Character  {
 }
 
 class AllySkills extends Skills {
-    static instances = []; // A palavra-chave static em JavaScript é usada para definir propriedades ou métodos que pertencem à classe e não às instâncias da classe
+    static instances = [];
 
     constructor(skillName, skillDamage, skillCost) {
         super(skillName, skillDamage, skillCost);  
         AllySkills.instances.push(this);
-    }
-
-    static getAllInstances() {
-        return AllySkills.instances
     }
 }
 
@@ -95,7 +91,6 @@ const allyPunch = new AllySkills('Punch', 20, 10);
 const allyJab = new AllySkills('Jab', 30, 10)
 
 // Atualiza o dano das skills e o nome delas na barra inferior
-
 const skillsName = document.querySelectorAll('.battle-menu__infos__skills__name')
 const skillsDamage = document.querySelectorAll('.battle-menu__infos__skills__damage')
 
@@ -105,7 +100,6 @@ for (let i = 0; i < AllySkills.instances.length; i++) {
 }
 
 // Definição das habilidades da CPU
-
 const enemyPunch = new EnemySkills('Punch', 20, 10);
 const enemyJab = new EnemySkills('Jab', 30, 10)
 
@@ -114,7 +108,6 @@ const protagonist = new Ally('Protagonist', [allyPunch, allyJab]);
 const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
 
 // Sistema de duração do turno
-
 function changeTimerInnerText() {
     const now = new Date()
     const turnStart = now.getTime()

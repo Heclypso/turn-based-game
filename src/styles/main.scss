@@ -7,8 +7,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-size: 18px;
-    // line-height: 21px;
 }
 
 .battle-hud {
@@ -228,9 +226,14 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 8px;
-                background-color: variables.$activeTransparentColor;
-                border: 1px solid variables.$activeTransparentBorderColor;
                 border-radius: 4px;
+                background-color: transparent;
+                border: 1px solid transparent;
+
+                &:hover {
+                    background-color: variables.$activeTransparentColor;
+                    border: 1px solid variables.$activeTransparentBorderColor;
+                }
             }
 
             &__main{
