@@ -33,10 +33,10 @@
         </div>
         <div class="battle-menu">
             <div class="battle-menu__options">
-                <button id="attack-button" class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
-                <button id="itens-button" class="battle-menu__options__button">Itens</button>
-                <button id="group-button" class="battle-menu__options__button">Grupo</button>
-                <button id="log-button" class="battle-menu__options__button">Registro</button>
+                <button data-button-name="options-button" id="attack-button" class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
+                <button data-button-name="options-button" id="itens-button" class="battle-menu__options__button">Itens</button>
+                <button data-button-name="options-button" id="group-button" class="battle-menu__options__button">Grupo</button>
+                <button data-button-name="options-button" id="log-button" class="battle-menu__options__button">Registro</button>
             </div>
             <div id="battle-infos" class="battle-menu__infos">
                 <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys-is--visible">
@@ -73,6 +73,76 @@
 
         <div id="log" class="battle-log">
 
+        </div>
+
+        <div id="itens" class="itens">
+            <div class="itens__header">
+                <div data-tab-id="all" class="itens__header__tab itens__header__tab-is--active">Todos</div>
+                <div data-tab-id="heal" class="itens__header__tab">Cura</div>
+                <div data-tab-id="damage" class="itens__header__tab">Dano</div>
+            </div>
+            <div class="itens__body">
+                <div class="itens__body__list">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+
+                    <div data-item-type="heal" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Poção de cura</span>
+                        </div>
+                        <span class="itens__body__list__item__number">25</span>
+                    </div>
+
+
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+
+                </div>
+                <div class="itens__body__list">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                        <div class="itens__body__list__item__main">
+                            <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
+                            <span class="itens__body__list__item__main__name">Item</span>
+                        </div>
+                        <span class="itens__body__list__item__number">10</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <script src="/dist/scripts/index.min.js"></script>
