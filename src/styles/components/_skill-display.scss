@@ -1,0 +1,23 @@
+@use 'variables';
+
+.skill-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-left: -40px;
+
+    &--hidden {
+        display: none;
+    }
+
+    &__icon {
+        border-radius: 2px;
+        border: 1px solid variables.$primaryTextColor;
+    }
+
+    &__name {
+        font-size: 32px;
+        color: variables.$primaryTextColor;
+    }
+}

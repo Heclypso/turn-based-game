@@ -1,5 +1,6 @@
 @use 'variables'; 
-@use 'results-screen';
+@use './components/results-screen';
+@use './components/skill-display';
 
 * {
     font-family: 'ABeeZee';
@@ -22,6 +23,28 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    &__container {
+        
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &--skill {
+        height: 70px;
+        margin-top: 32px;
+        background-color: variables.$secondaryTransparentColor;
+        border: 5px solid variables.$secondaryTransparentColor;
+    }
+
+    &--ally {
+        border: 5px solid variables.$allyColor;
+    }
+
+    &--enemy {
+        border: 5px solid variables.$enemyColor;
+    }
 
     &__display {
         color: variables.$primaryTextColor;
@@ -58,17 +81,16 @@
             line-height: 14px;
             color: variables.$primaryTextColor;
         }
+    }
 
-        &__hpbar {
-            width: 249.77px;
-            height: 8px;
-            background-color: variables.$hpBarEmptyBackgroundColor;
+    &__hpbar {
+        width: 249.77px;
+        height: 8px;
+        background-color: variables.$hpBarEmptyBackgroundColor;
 
-            &-is--full {
-                background-color: variables.$hpBarFullBackgroundColor;
-            }
+        &--full {
+            background-color: variables.$hpBarFullBackgroundColor;
         }
-        
     }
 }
 

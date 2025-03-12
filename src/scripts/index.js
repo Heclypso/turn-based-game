@@ -56,20 +56,25 @@ class Ally extends Character  {
         if (this.getHp() <= 0) {
             firstEnemy.setCanAttack(false)
             protagonist.setCanAttack(false)
-            ally.style.opacity = '0';
-            enemyInfos.style.opacity = '0'
-            setTimeout(() => {
-                enemyInfos.style.display = 'none'
-                setTimeout(() => {
-                    enemy.style.opacity = '0';
-                    enemyName.style.opacity = '0'
-                    resultsScreen.classList.remove('results-screen-is--hidden')
-                    resultsScreenTitle.classList.add('results-screen__title--defeat')
-                    resultsScreenTitle.innerText = 'Derrota'
-                }, 1000);
-            }, 2000);
+            defeat()
         }
     }
+}
+
+// Função de derrota
+function defeat() {
+    ally.style.opacity = '0';
+    enemyInfos.style.opacity = '0'
+    setTimeout(() => {
+        enemyInfos.style.display = 'none'
+        setTimeout(() => {
+            enemy.style.opacity = '0';
+            enemyName.style.opacity = '0'
+            resultsScreen.classList.remove('results-screen-is--hidden')
+            resultsScreenTitle.classList.add('results-screen__title--defeat')
+            resultsScreenTitle.innerText = 'Derrota'
+        }, 1000);
+    }, 2000);
 }
 
 class AllySkills extends Skills {
@@ -93,20 +98,25 @@ class Enemy extends Character {
         if (this.getHp() <= 0) {
             protagonist.setCanAttack(false)
             firstEnemy.setCanAttack(false)
-            enemy.style.opacity = '0';
-            enemyInfos.style.opacity = '0'
-            setTimeout(() => {
-                enemyInfos.style.display = 'none'
-                setTimeout(() => {
-                    ally.style.opacity = '0';
-                    enemyName.style.opacity = '0'
-                    resultsScreen.classList.remove('results-screen-is--hidden')
-                    resultsScreenTitle.classList.add('results-screen__title--victory')
-                    resultsScreenTitle.innerText = 'Vitória'
-                }, 1000);
-            }, 1000);
+            victory()
         }
     }
+}
+
+// Função de vitória 
+function victory() {
+    enemy.style.opacity = '0';
+    enemyInfos.style.opacity = '0'
+    setTimeout(() => {
+        enemyInfos.style.display = 'none'
+        setTimeout(() => {
+            ally.style.opacity = '0';
+            enemyName.style.opacity = '0'
+            resultsScreen.classList.remove('results-screen-is--hidden')
+            resultsScreenTitle.classList.add('results-screen__title--victory')
+            resultsScreenTitle.innerText = 'Vitória'
+        }, 1000);
+    }, 1000);
 }
 
 class EnemySkills extends Skills {
@@ -137,6 +147,13 @@ firstEnemy.setCanAttack(false)
 // Seleção de skill aleatoria para o inimigo (computador) atacar.
 const enemySkillsArray = [enemyPunch, enemyJab]
 
+// Display de skills 
+const battleHud = document.getElementById('battle-hud')
+const battleHudContainer = document.getElementById('battle-hud-container')
+const skillDisplay = document.getElementById('skill-display')
+const skillDisplayName = document.getElementById('skill-display-name')
+const skillDisplayIcon = document.getElementById('skill-display-icon')
+
 // Sistema do player escolher uma skill e atacar com ela
 const allySkillsArray = [allyPunch, allyJab]
 const skill = document.querySelectorAll('#skill-button')
@@ -149,22 +166,58 @@ const skills = document.getElementById('skills')
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
         if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
-            skills.classList.remove('battle-menu__infos__skills-is--visible')
-            protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
-            firstEnemy.getAttacked(allySkillsArray[i].damage);
-            enemyDamageIndicator.innerHTML = `${allySkillsArray[i].damage}`
-            enemyDamageIndicator.style.opacity = '1'
-            enemyDamageIndicator.style.bottom = '-30%'
-            firstEnemy.updateHpBars();
-            firstEnemy.setCanAttack(true)
+            showSkillDisplay(`${allySkillsArray[i].name}`, '--ally')
+            showSkills()
             setTimeout(() => {
-                enemyDamageIndicator.style.opacity = '0'
+                protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
+                firstEnemy.getAttacked(allySkillsArray[i].damage);
+                showEnemyDamageIndicator(`${allySkillsArray[i].damage}`)
+                firstEnemy.updateHpBars();
+                firstEnemy.setCanAttack(true)
                 setTimeout(() => {
-                    enemyDamageIndicator.style.bottom = '20%'
-                }, 2500);
-            }, 1500);
+                    hideSkillsDisplay()
+                    hideEnemyDamageIndicator()
+                }, 1500);
+            }, 500);
         }
     })
+}
+
+// Função que mostra as opções de skills
+function showSkills() {
+    skills.classList.remove('battle-menu__infos__skills-is--visible')
+}
+
+// Função que mostra o skill display
+function showSkillDisplay(name, theme) {
+    battleHud.classList.add('battle-hud--skill')
+    battleHudContainer.classList.add('battle-hud__container--hidden')
+    skillDisplay.classList.remove('skill-display--hidden')
+    skillDisplayName.innerText = name;
+    battleHud.classList.add(`battle-hud${theme}`)
+}
+
+function hideSkillsDisplay() {
+    battleHud.classList.remove('battle-hud--skill')
+    battleHudContainer.classList.remove('battle-hud__container--hidden')
+    skillDisplay.classList.add('skill-display--hidden')
+    battleHud.classList.remove(`battle-hud--ally`)
+    battleHud.classList.remove(`battle-hud--enemy`)
+}
+
+// Função que mostra o damage indicator do inimigo
+function showEnemyDamageIndicator(damage) {
+    enemyDamageIndicator.innerText = damage;
+    enemyDamageIndicator.style.opacity = '1'
+    enemyDamageIndicator.style.bottom = '-30%'
+}
+
+// Função que esconde o damage indicator do inimigo
+function hideEnemyDamageIndicator() {
+    enemyDamageIndicator.style.opacity = '0'
+    setTimeout(() => {
+        enemyDamageIndicator.style.bottom = '20%'
+    }, 2500);
 }
 
 // Sistema de duração do turno e ataque da CPU
@@ -198,23 +251,20 @@ function changeTimerInnerText() {
 
                 if(firstEnemy.getHp() > 0 && protagonist.getHp() > 0) {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
-                    console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
-                    protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
-                    allyDamageIndicator.innerHTML = `${enemySkillsArray[randomSkill].damage}`
-                    allyDamageIndicator.style.opacity = '1'
-                    allyDamageIndicator.style.right = '-30%'
-                    protagonist.updateHpBars();
-                    firstEnemy.setCanAttack(false)
+                    showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
                     setTimeout(() => {
-                        allyDamageIndicator.style.opacity = '0'
-                        ally.style.left = '122px'
+                        console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
+                        protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                        showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
+                        protagonist.updateHpBars();
+                        firstEnemy.setCanAttack(false)
                         setTimeout(() => {
-                            allyDamageIndicator.style.right = '0'
+                            hideSkillsDisplay()
+                            hideAllyDamageIndicator()
                             changeTimerInnerText()
-                        }, 500);
-                    }, 1500);
-                
-                    allys.classList.add('battle-menu__infos__allys-is--visible')
+                        }, 1500);
+                    }, 500);
+                    showAllysInfos()
                 }
             }
         }, 1000);
@@ -222,6 +272,26 @@ function changeTimerInnerText() {
 }
 
 changeTimerInnerText()
+
+// Função que mostra o damage indicator do aliado
+function showAllyDamageIndicator(damage) {
+    allyDamageIndicator.innerHTML = damage
+    allyDamageIndicator.style.opacity = '1'
+    allyDamageIndicator.style.right = '-30%'
+}
+
+// Função que esconde o damage indicator do aliado
+function hideAllyDamageIndicator() {
+    allyDamageIndicator.style.opacity = '0'
+    setTimeout(() => {
+        allyDamageIndicator.style.right = '0'
+    }, 1500);
+}
+
+// Função que mostra as informações dos aliados na party 
+function showAllysInfos() {
+    allys.classList.add('battle-menu__infos__allys-is--visible')
+}
 
 // const resultsScreenPlayer = document.getElementById('results-screen-player')
 // const resultsScreenMessage = document.getElementById('results-screen-message')

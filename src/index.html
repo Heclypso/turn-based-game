@@ -11,17 +11,24 @@
 </head>
 <body>
     <div class="battle-stage">
-        <div class="battle-hud">
-            <div id="enemy-name" class="battle-hud__display">Inimigo [inimigo]</div>
-            <span id="timer" class="battle-hud__timer"></span>
-            <div id="enemy-infos" class="battle-hud__infos">
-                <div class="battle-hud__infos__container">
-                    <span>HP</span><span id="enemy-hp-number">100</span>
-                </div>
-                <div class="battle-hud__infos__hpbar">
-                    <div id="enemy-hp-bar" class="battle-hud__infos__hpbar battle-hud__infos__hpbar-is--full"></div>
+        <div id="battle-hud" class="battle-hud">
+            <div id="battle-hud-container" class="battle-hud__container"> 
+                <div id="enemy-name" class="battle-hud__display">Inimigo [inimigo]</div>
+                <span id="timer" class="battle-hud__timer"></span>
+                <div id="enemy-infos" class="battle-hud__infos">
+                    <div class="battle-hud__infos__container">
+                        <span>HP</span><span id="enemy-hp-number">100</span>
+                    </div>
+                    <div class="battle-hud__hpbar">
+                        <div id="enemy-hp-bar" class="battle-hud__hpbar battle-hud__hpbar--full"></div>
+                    </div>
                 </div>
             </div>
+
+            <div id="skill-display" class="skill-display skill-display--hidden skill-display--ally">
+                <img id="skill-display-icon" class="skill-display__icon" src="https://placehold.co/38x38" alt="Ícone da habilidade">
+                <span id="skill-display-name" class="skill-display__name">Cansão do sono</span>
+            </div>            
         </div>
 
         <div id="ally" class="battle-stage__ally">
