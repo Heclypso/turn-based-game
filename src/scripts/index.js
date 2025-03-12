@@ -7,6 +7,7 @@ const enemyHpValue = document.getElementById('enemy-hp-number')
 class Character {
     #maxHp = 100;
     #hp = 100;
+    #canAttack = true;
 
     constructor(characterName, characterSkills) {
         this.name = characterName;
@@ -26,6 +27,12 @@ class Character {
     }
     updateHpBars() {
     }
+    setCanAttack(value) {
+        this.#canAttack = value;
+    }
+    getCanAttack() {
+        return this.#canAttack;
+    }
 }
 
 class Skills {
@@ -40,14 +47,6 @@ const ally = document.getElementById('ally')
 
 const resultsScreen = document.getElementById('results-screen')
 const resultsScreenTitle = document.getElementById('results-screen-title')
-const resultsScreenPlayer = document.getElementById('results-screen-player')
-const resultsScreenMessage = document.getElementById('results-screen-message')
-const resultsScreenDamageDealt = document.getElementById('results-screen-damage-dealt')
-const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
-const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
-const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
-
-const playAgainButton = document.getElementById('play-again');
 
 class Ally extends Character  {
     updateHpBars() {
@@ -55,6 +54,8 @@ class Ally extends Character  {
         allyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
+            firstEnemy.setCanAttack(false)
+            protagonist.setCanAttack(false)
             ally.style.opacity = '0';
             resultsScreen.classList.remove('results-screen-is--hidden')
             resultsScreenTitle.classList.add('results-screen__title--defeat')
@@ -82,6 +83,8 @@ class Enemy extends Character {
         enemyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
+            protagonist.setCanAttack(false)
+            firstEnemy.setCanAttack(false)
             enemy.style.opacity = '0';
             enemyInfos.style.opacity = '0'
             setTimeout(() => {
@@ -121,6 +124,7 @@ const enemyJab = new EnemySkills('Jab', 30, 10)
 // Definição da instancia dos personagens
 const protagonist = new Ally('Protagonist', [allyPunch, allyJab]);
 const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
+firstEnemy.setCanAttack(false)
 
 // Seleção de skill aleatoria para o inimigo (computador) atacar.
 const enemySkillsArray = [enemyPunch, enemyJab]
@@ -134,7 +138,6 @@ const allyDamageIndicator = document.getElementById('ally-damage-indicator')
 const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
 const skills = document.getElementById('skills')
 
-let cpuCanAttack = false;
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
         if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
@@ -145,7 +148,7 @@ for (let i = 0; i < skill.length; i++) {
             enemyDamageIndicator.style.opacity = '1'
             enemyDamageIndicator.style.bottom = '-30%'
             firstEnemy.updateHpBars();
-            cpuCanAttack = true;
+            firstEnemy.setCanAttack(true)
             setTimeout(() => {
                 enemyDamageIndicator.style.opacity = '0'
                 setTimeout(() => {
@@ -182,7 +185,7 @@ function changeTimerInnerText() {
                 document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
             }
         
-            if (timeLeftToEndTheTurn < 0 || cpuCanAttack == true) {
+            if (timeLeftToEndTheTurn < 0 || firstEnemy.getCanAttack() === true) {
                 clearInterval(timeCounter)
                 document.getElementById('timer').innerText = ''
 
@@ -194,7 +197,7 @@ function changeTimerInnerText() {
                     allyDamageIndicator.style.opacity = '1'
                     allyDamageIndicator.style.right = '-30%'
                     protagonist.updateHpBars();
-                    cpuCanAttack = false;
+                    firstEnemy.setCanAttack(false)
                     setTimeout(() => {
                         allyDamageIndicator.style.opacity = '0'
                         ally.style.left = '122px'
@@ -212,3 +215,14 @@ function changeTimerInnerText() {
 }
 
 changeTimerInnerText()
+
+// const resultsScreenPlayer = document.getElementById('results-screen-player')
+// const resultsScreenMessage = document.getElementById('results-screen-message')
+// const resultsScreenDamageDealt = document.getElementById('results-screen-damage-dealt')
+// const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
+// const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
+// const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
+// const playAgainButton = document.getElementById('play-again');
+
+// protagonist.setCanAttack(false)
+// console.log(protagonist.getCanAttack())
