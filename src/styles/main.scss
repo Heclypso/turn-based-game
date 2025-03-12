@@ -173,7 +173,7 @@
             height: 24px;
             border-radius: 4px;
 
-            &-is--active {
+            &--active {
                 background-color: variables.$activeTransparentColor;
                 border: 1px solid variables.$activeTransparentBorderColor;
             }
@@ -201,7 +201,18 @@
             width: 600px;
             height: 36px;
 
-            &-is--visible {
+            &__container {
+                display: flex;
+                flex-direction: row-reverse;
+                gap: 4px;
+            }
+
+            &__effect-icon {
+                border-radius: 2px;
+                border: 1px solid variables.$primaryTextColor;
+            }
+
+            &--visible {
                 display: flex;
             }
 
@@ -228,7 +239,7 @@
                     height: 8px;
                     background-color: variables.$hpBarEmptyBackgroundColor;
 
-                    &-is--full {
+                    &--full {
                         background-color: variables.$hpBarFullBackgroundColor;
                     }
                 }
@@ -241,7 +252,7 @@
             flex-direction: column;
             justify-content: space-between;
         
-            &-is--visible {
+            &--visible {
                 display: flex;
             }
 
@@ -291,7 +302,7 @@
     right: 0;
     display: none;
 
-    &-is--visible {
+    &--visible {
         display: flex;
     }
 }
@@ -304,7 +315,7 @@
     width: 648px;
     display: none;
 
-    &-is--visible {
+    &--visible {
         display: block;
     }
 
@@ -323,7 +334,7 @@
             height: 24px;
             text-align: center;
 
-            &-is--active {
+            &--active {
                 background-color: variables.$activeTransparentColor;
                 border: 1px solid variables.$activeTransparentBorderColor;
                 border-radius: 4px;
@@ -356,13 +367,13 @@
                     cursor: pointer;
                 }
 
-                &-is--selected {
+                &--selected {
                     background-color: variables.$activeTransparentColor;
                     border: 1px solid variables.$activeTransparentBorderColor;
                     border-radius: 4px;
                 }
 
-                &-is--hidden {
+                &--hidden {
                     display: none;
                 }
 

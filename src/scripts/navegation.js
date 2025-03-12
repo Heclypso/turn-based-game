@@ -18,28 +18,28 @@ for (let i = 0; i < buttons.length; i++) {
         switch(buttons[i].id) {
             case ('attack-button'): 
                 removeAtiveOptions()
-                attackButton.classList.add('battle-menu__options__button-is--active')
-                allys.classList.remove('battle-menu__infos__allys-is--visible')
-                skills.classList.add('battle-menu__infos__skills-is--visible')
+                attackButton.classList.add('battle-menu__options__button--active')
+                allys.classList.remove('battle-menu__infos__allys--visible')
+                skills.classList.add('battle-menu__infos__skills--visible')
             break;
 
             case ('itens-button'): 
                 removeAtiveOptions()
-                itensButton.classList.add('battle-menu__options__button-is--active')
-                itemMenu.classList.toggle('itens-is--visible')
+                itensButton.classList.add('battle-menu__options__button--active')
+                itemMenu.classList.toggle('itens--visible')
             break;
 
             case ('group-button'): 
                 removeAtiveOptions()
-                groupButton.classList.add('battle-menu__options__button-is--active')
-                allys.classList.add('battle-menu__infos__allys-is--visible')
-                skills.classList.remove('battle-menu__infos__skills-is--visible')
+                groupButton.classList.add('battle-menu__options__button--active')
+                allys.classList.add('battle-menu__infos__allys--visible')
+                skills.classList.remove('battle-menu__infos__skills--visible')
             break;
 
             case ('log-button'): 
                 removeAtiveOptions()
-                logButton.classList.add('battle-menu__options__button-is--active')
-                log.classList.toggle('battle-log-is--visible')
+                logButton.classList.add('battle-menu__options__button--active')
+                log.classList.toggle('battle-log--visible')
             break;
         }
     }
@@ -50,7 +50,7 @@ for (let i = 0; i < buttons.length; i++) {
 const optionButtons = document.querySelectorAll(`[data-button-name="options-button"]`)
 
 function removeAtiveOptions() {
-    optionButtons.forEach(item => item.classList.remove('battle-menu__options__button-is--active'))
+    optionButtons.forEach(item => item.classList.remove('battle-menu__options__button--active'))
 }
 
 // navegação do menu de itens
@@ -59,14 +59,14 @@ const itemListItem = document.querySelectorAll('.itens__body__list__item')
 for (let i = 0; i < itemListItem.length; i++) {
     itemListItem[i].addEventListener('click', function(){
         removeActiveItens()
-        itemListItem[i].classList.add('itens__body__list__item-is--selected')
+        itemListItem[i].classList.add('itens__body__list__item--selected')
     })
 }
 
 // função que remove todas as classes que representam o botão selecionado
 function removeActiveItens() {
     for (let i = 0; i < itemListItem.length; i++) {
-        itemListItem[i].classList.remove('itens__body__list__item-is--selected')
+        itemListItem[i].classList.remove('itens__body__list__item--selected')
     }
 }
 
@@ -75,14 +75,14 @@ const itemTab = document.querySelectorAll('.itens__header__tab')
 for (let i = 0; i < itemTab.length; i++) {
     itemTab[i].addEventListener('click', function(){
         removeAtiveTabs()
-        itemTab[i].classList.add('itens__header__tab-is--active')
+        itemTab[i].classList.add('itens__header__tab--active')
     })
 }
 
 // função que remove todas as classes que representam a aba ativa
 function removeAtiveTabs() {
     for (let i = 0; i < itemTab.length; i++) {
-        itemTab[i].classList.remove('itens__header__tab-is--active')
+        itemTab[i].classList.remove('itens__header__tab--active')
     }
 }
 
@@ -95,16 +95,16 @@ document.querySelector(`[data-tab-id="heal"]`).addEventListener('click',  showHe
 document.querySelector(`[data-tab-id="damage"]`).addEventListener('click',  showDamageItens)
 
 function showAllItens() {
-    itens.forEach(item => item.classList.remove('itens__body__list__item-is--hidden'))
+    itens.forEach(item => item.classList.remove('itens__body__list__item--hidden'))
 }
 showAllItens()
 
 function showHealItens() {
-    damageItens.forEach(item => item.classList.add('itens__body__list__item-is--hidden'))
-    healItens.forEach(item => item.classList.remove('itens__body__list__item-is--hidden'))
+    damageItens.forEach(item => item.classList.add('itens__body__list__item--hidden'))
+    healItens.forEach(item => item.classList.remove('itens__body__list__item--hidden'))
 }
 
 function showDamageItens() {
-    healItens.forEach(item => item.classList.add('itens__body__list__item-is--hidden'))
-    damageItens.forEach(item => item.classList.remove('itens__body__list__item-is--hidden'))
+    healItens.forEach(item => item.classList.add('itens__body__list__item--hidden'))
+    damageItens.forEach(item => item.classList.remove('itens__body__list__item--hidden'))
 }

@@ -27,7 +27,7 @@
 
             <div id="skill-display" class="skill-display skill-display--hidden skill-display--ally">
                 <img id="skill-display-icon" class="skill-display__icon" src="https://placehold.co/38x38" alt="Ícone da habilidade">
-                <span id="skill-display-name" class="skill-display__name">Cansão do sono</span>
+                <span id="skill-display-name" class="skill-display__name"></span>
             </div>            
         </div>
 
@@ -40,20 +40,22 @@
 
         <div class="battle-menu">
             <div class="battle-menu__options">
-                <button data-button-name="options-button" id="attack-button" class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
+                <button data-button-name="options-button" id="attack-button" class="battle-menu__options__button battle-menu__options__button--active">Atacar</button>
                 <button data-button-name="options-button" id="itens-button" class="battle-menu__options__button">Itens</button>
                 <button data-button-name="options-button" id="group-button" class="battle-menu__options__button">Grupo</button>
                 <button data-button-name="options-button" id="log-button" class="battle-menu__options__button">Registro</button>
             </div>
             <div id="battle-infos" class="battle-menu__infos">
-                <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys-is--visible">
+                <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys--visible">
                     <span class="battle-menu__infos__allys__name">Você</span>
-                    <div class="battle-menu__infos__allys__status">
-                        <div class="battle-menu__infos__allys__status__container">
-                            <span>HP</span><span id="ally-hp-number">100</span>
-                        </div>
-                        <div class="battle-menu__infos__allys__status__hpbar">
-                            <div id="ally-hp-bar" class="battle-menu__infos__allys__status__hpbar battle-menu__infos__allys__status__hpbar-is--full"></div>
+                    <div id="ally-status-container" class="battle-menu__infos__allys__container">
+                        <div class="battle-menu__infos__allys__status">
+                            <div class="battle-menu__infos__allys__status__container">
+                                <span>HP</span><span id="ally-hp-number">100</span>
+                            </div>
+                            <div class="battle-menu__infos__allys__status__hpbar">
+                                <div id="ally-hp-bar" class="battle-menu__infos__allys__status__hpbar battle-menu__infos__allys__status__hpbar--full"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,13 +86,13 @@
 
         <div id="itens" class="itens">
             <div class="itens__header">
-                <div data-tab-id="all" class="itens__header__tab itens__header__tab-is--active">Todos</div>
+                <div data-tab-id="all" class="itens__header__tab itens__header__tab--active">Todos</div>
                 <div data-tab-id="heal" class="itens__header__tab">Cura</div>
                 <div data-tab-id="damage" class="itens__header__tab">Dano</div>
             </div>
             <div class="itens__body">
                 <div class="itens__body__list">
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -98,7 +100,7 @@
                         <span class="itens__body__list__item__number">10</span>
                     </div>
     
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -106,7 +108,7 @@
                         <span class="itens__body__list__item__number">10</span>
                     </div>
     
-                    <div data-item-type="heal" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="heal" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Poção de cura</span>
@@ -115,7 +117,7 @@
                     </div>
     
     
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -125,7 +127,7 @@
     
                 </div>
                 <div class="itens__body__list">
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -133,7 +135,7 @@
                         <span class="itens__body__list__item__number">10</span>
                     </div>
     
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -141,7 +143,7 @@
                         <span class="itens__body__list__item__number">10</span>
                     </div>
     
-                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
+                    <div data-item-type="damage" class="itens__body__list__item itens__body__list__item--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
                             <span class="itens__body__list__item__main__name">Item</span>
@@ -152,7 +154,7 @@
             </div>
         </div>
 
-        <div id="results-screen" class="results-screen results-screen-is--hidden">
+        <div id="results-screen" class="results-screen results-screen--hidden">
             <h2 id="results-screen-title" class="results-screen__title"></h2>
             <div class="results-screen__container">
                 <div id="results-screen-player" class="results-screen__container__player"></div>

@@ -8,6 +8,7 @@ class Character {
     #maxHp = 100;
     #hp = 100;
     #canAttack = true;
+    #negativeEffect = 'none';
 
     constructor(characterName, characterSkills) {
         this.name = characterName;
@@ -32,6 +33,12 @@ class Character {
     }
     getCanAttack() {
         return this.#canAttack;
+    }
+    setNegativeEffect(value) {
+        this.#negativeEffect = value;
+    }
+    getNegativeEffect() {
+        return this.#negativeEffect;
     }
 }
 
@@ -70,7 +77,7 @@ function defeat() {
         setTimeout(() => {
             enemy.style.opacity = '0';
             enemyName.style.opacity = '0'
-            resultsScreen.classList.remove('results-screen-is--hidden')
+            resultsScreen.classList.remove('results-screen--hidden')
             resultsScreenTitle.classList.add('results-screen__title--defeat')
             resultsScreenTitle.innerText = 'Derrota'
         }, 1000);
@@ -112,7 +119,7 @@ function victory() {
         setTimeout(() => {
             ally.style.opacity = '0';
             enemyName.style.opacity = '0'
-            resultsScreen.classList.remove('results-screen-is--hidden')
+            resultsScreen.classList.remove('results-screen--hidden')
             resultsScreenTitle.classList.add('results-screen__title--victory')
             resultsScreenTitle.innerText = 'Vitória'
         }, 1000);
@@ -165,7 +172,7 @@ const skills = document.getElementById('skills')
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
-        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && document.getElementById('timer').innerText != '') {
+        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && protagonist.getCanAttack() === true && document.getElementById('timer').innerText != '') {
             showSkillDisplay(`${allySkillsArray[i].name}`, '--ally')
             showSkills()
             setTimeout(() => {
@@ -185,7 +192,7 @@ for (let i = 0; i < skill.length; i++) {
 
 // Função que mostra as opções de skills
 function showSkills() {
-    skills.classList.remove('battle-menu__infos__skills-is--visible')
+    skills.classList.remove('battle-menu__infos__skills--visible')
 }
 
 // Função que mostra o skill display
@@ -222,7 +229,7 @@ function hideEnemyDamageIndicator() {
 
 // Sistema de duração do turno e ataque da CPU
 function changeTimerInnerText() {
-    if (protagonist.getHp() > 0  && enemyDamageIndicator.style.bottom != '20%') {
+    if (protagonist.getHp() > 0 && enemyDamageIndicator.style.bottom != '20%' || document.getElementById('timer').innerText == '' && protagonist.getHp() > 0) {
         const now = new Date()
         const turnStart = now.getTime()
         const turnEnd = turnStart + 1000 * 62;  
@@ -245,7 +252,7 @@ function changeTimerInnerText() {
                 document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
             }
         
-            if (timeLeftToEndTheTurn < 0 || firstEnemy.getCanAttack() === true) {
+            if (timeLeftToEndTheTurn < 0 || firstEnemy.getCanAttack() === true || protagonist.getCanAttack() === false) {
                 clearInterval(timeCounter)
                 document.getElementById('timer').innerText = ''
 
@@ -255,6 +262,7 @@ function changeTimerInnerText() {
                     setTimeout(() => {
                         console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                         protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                        trySetSleepNegativeEffect('sleep')
                         showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
                         protagonist.updateHpBars();
                         firstEnemy.setCanAttack(false)
@@ -262,6 +270,7 @@ function changeTimerInnerText() {
                             hideSkillsDisplay()
                             hideAllyDamageIndicator()
                             changeTimerInnerText()
+                            verifyNegativeEffect()
                         }, 1500);
                     }, 500);
                     showAllysInfos()
@@ -272,6 +281,49 @@ function changeTimerInnerText() {
 }
 
 changeTimerInnerText()
+
+// Função que tenta aplicar o efeito negativo de sleep
+function trySetSleepNegativeEffect(effect) {
+    const number = Math.random()
+    if (number > 0.5) {
+        protagonist.setNegativeEffect(`${effect}`)
+    }
+    console.log(number)
+}
+
+const allyStatusContainer = document.getElementById('ally-status-container')
+
+function verifyNegativeEffect() {
+    if (protagonist.getNegativeEffect() != 'none') {
+        switch (protagonist.getNegativeEffect()) {
+            case ('sleep'):
+                protagonist.setCanAttack(false);
+
+                const negativeStatusIcon = document.createElement('img');
+                if (allyStatusContainer.children.length >= 2) {
+                    removeNegativeStatus()
+                } else {
+                negativeStatusIcon.className = ('battle-menu__infos__allys__effect-icon')
+                negativeStatusIcon.id = 'negative-status-icon'
+                negativeStatusIcon.src = 'https://placehold.co/26x24'
+                negativeStatusIcon.alt = 'Ícone do efeito'
+
+                allyStatusContainer.appendChild(negativeStatusIcon)
+                }
+            break;
+        }
+        
+    }
+}
+
+// Função que remove o status negativo do jogador 
+function removeNegativeStatus() {
+    protagonist.setCanAttack(true)
+    if (allyStatusContainer.children.length >= 2) {
+        const negativeStatusIcon = document.getElementById('negative-status-icon')
+        allyStatusContainer.removeChild(negativeStatusIcon)
+    }
+}
 
 // Função que mostra o damage indicator do aliado
 function showAllyDamageIndicator(damage) {
@@ -290,7 +342,7 @@ function hideAllyDamageIndicator() {
 
 // Função que mostra as informações dos aliados na party 
 function showAllysInfos() {
-    allys.classList.add('battle-menu__infos__allys-is--visible')
+    allys.classList.add('battle-menu__infos__allys--visible')
 }
 
 // const resultsScreenPlayer = document.getElementById('results-screen-player')
