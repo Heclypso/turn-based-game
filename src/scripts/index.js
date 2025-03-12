@@ -38,6 +38,17 @@ class Skills {
 
 const ally = document.getElementById('ally')
 
+const resultsScreen = document.getElementById('results-screen')
+const resultsScreenTitle = document.getElementById('results-screen-title')
+const resultsScreenPlayer = document.getElementById('results-screen-player')
+const resultsScreenMessage = document.getElementById('results-screen-message')
+const resultsScreenDamageDealt = document.getElementById('results-screen-damage-dealt')
+const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
+const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
+const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
+
+const playAgainButton = document.getElementById('play-again');
+
 class Ally extends Character  {
     updateHpBars() {
         allyHpBar.style.width = `${(this.getHp()/ this.getMaxHp()) *100}%`;
@@ -45,7 +56,9 @@ class Ally extends Character  {
 
         if (this.getHp() <= 0) {
             ally.style.opacity = '0';
-            console.log("Você perdeu")
+            resultsScreen.classList.remove('results-screen-is--hidden')
+            resultsScreenTitle.classList.add('results-screen__title--defeat')
+            resultsScreenTitle.innerText = 'Derrota'
         }
     }
 }
@@ -72,10 +85,12 @@ class Enemy extends Character {
             enemy.style.opacity = '0';
             enemyInfos.style.opacity = '0'
             setTimeout(() => {
-                console.log("Você ganhou")
                 enemyInfos.style.display = 'none'
                 setTimeout(() => {
                     enemyName.style.opacity = '0'
+                    resultsScreen.classList.remove('results-screen-is--hidden')
+                    resultsScreenTitle.classList.add('results-screen__title--victory')
+                    resultsScreenTitle.innerText = 'Vitória'
                 }, 1000);
             }, 1000);
         }

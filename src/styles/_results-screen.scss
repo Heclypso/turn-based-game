@@ -1,0 +1,81 @@
+@use 'variables';
+
+.results-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1366px;
+    height: 768px;
+    background-color: variables.$primaryTransparentColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-is--hidden {
+        display: none;
+    }
+
+    &__title {
+        font-size: 48px;
+        color: variables.$enemyColor;
+        margin-bottom: 48px;
+
+        &--victory {
+            color: variables.$victoryThemeTextColor;
+        }
+
+        &--defeat {
+            color: variables.$damageIndicatorColor;
+        }
+    }
+
+    &__container {
+        display: flex;
+
+        &__player {
+            background-color: variables.$allyColor;
+            width: 187px;
+            height: 180px;
+        }
+    
+        &__content {
+            margin-left: 24px;
+
+            &__header {
+                font-size: 36px;
+                color: variables.$primaryTextColor;
+                margin-bottom: 28px;
+            }
+
+            &__body {
+                font-size: 28px;
+                color: variables.$primaryTextColor;
+                margin-bottom: 28px;
+                display: flex;
+
+                &__list {
+                    display: flex;
+                    flex-direction: column;
+                    margin-right: 26px;
+    
+                    &__item {
+                        font-size: 28px;
+                        color: variables.$primaryTextColor;
+                        margin-bottom: 4px;
+                    }
+                }
+            }
+
+            &__button {
+                width: 234px;
+                height: 43px;
+                font-size: 24px;
+                background-color: variables.$activeTransparentColor;
+                border: 1px solid variables.$activeTransparentBorderColor;
+                color: variables.$primaryTextColor;
+                border-radius: 4px;
+            }
+        }
+    }
+}
