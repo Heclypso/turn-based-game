@@ -18,8 +18,8 @@
 
     &__title {
         font-size: 48px;
-        color: variables.$enemyColor;
         margin-bottom: 48px;
+        margin-left: -80px;
 
         &--victory {
             color: variables.$victoryThemeTextColor;

@@ -74,10 +74,12 @@
 
 
 .battle-stage {
+    margin: 0 auto;
     background-image: url('https://servidor-estatico-alpha-six.vercel.app/turn-based-game-background.jpg');
     background-size: cover;
     width: 1366px;
     height: 768px;
+    position: relative;
 
     &__ally {
         background-color: variables.$allyColor;

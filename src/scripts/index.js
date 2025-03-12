@@ -57,9 +57,17 @@ class Ally extends Character  {
             firstEnemy.setCanAttack(false)
             protagonist.setCanAttack(false)
             ally.style.opacity = '0';
-            resultsScreen.classList.remove('results-screen-is--hidden')
-            resultsScreenTitle.classList.add('results-screen__title--defeat')
-            resultsScreenTitle.innerText = 'Derrota'
+            enemyInfos.style.opacity = '0'
+            setTimeout(() => {
+                enemyInfos.style.display = 'none'
+                setTimeout(() => {
+                    enemy.style.opacity = '0';
+                    enemyName.style.opacity = '0'
+                    resultsScreen.classList.remove('results-screen-is--hidden')
+                    resultsScreenTitle.classList.add('results-screen__title--defeat')
+                    resultsScreenTitle.innerText = 'Derrota'
+                }, 1000);
+            }, 2000);
         }
     }
 }
@@ -90,6 +98,7 @@ class Enemy extends Character {
             setTimeout(() => {
                 enemyInfos.style.display = 'none'
                 setTimeout(() => {
+                    ally.style.opacity = '0';
                     enemyName.style.opacity = '0'
                     resultsScreen.classList.remove('results-screen-is--hidden')
                     resultsScreenTitle.classList.add('results-screen__title--victory')
@@ -102,7 +111,6 @@ class Enemy extends Character {
 
 class EnemySkills extends Skills {
 }
-
 
 // Definição das instancias de habilidades dos personagens
 const allyPunch = new AllySkills('Punch', 20, 10);
@@ -158,7 +166,6 @@ for (let i = 0; i < skill.length; i++) {
         }
     })
 }
-
 
 // Sistema de duração do turno e ataque da CPU
 function changeTimerInnerText() {

@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
+    <div class="battle-stage">
         <div class="battle-hud">
             <div id="enemy-name" class="battle-hud__display">Inimigo [inimigo]</div>
             <span id="timer" class="battle-hud__timer"></span>
@@ -23,14 +23,14 @@
                 </div>
             </div>
         </div>
-        <div class="battle-stage">
-            <div id="ally" class="battle-stage__ally">
-                <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator"></span>
-            </div>
-            <div id="enemy" class="battle-stage__enemy">
-                <span id="enemy-damage-indicator" class="battle-stage__enemy__damage-indicator"></span>
-            </div>
+
+        <div id="ally" class="battle-stage__ally">
+            <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator"></span>
         </div>
+        <div id="enemy" class="battle-stage__enemy">
+            <span id="enemy-damage-indicator" class="battle-stage__enemy__damage-indicator"></span>
+        </div>
+
         <div class="battle-menu">
             <div class="battle-menu__options">
                 <button data-button-name="options-button" id="attack-button" class="battle-menu__options__button battle-menu__options__button-is--active">Atacar</button>
@@ -90,7 +90,7 @@
                         </div>
                         <span class="itens__body__list__item__number">10</span>
                     </div>
-
+    
                     <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
@@ -98,7 +98,7 @@
                         </div>
                         <span class="itens__body__list__item__number">10</span>
                     </div>
-
+    
                     <div data-item-type="heal" class="itens__body__list__item itens__body__list__item-is--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
@@ -106,8 +106,8 @@
                         </div>
                         <span class="itens__body__list__item__number">25</span>
                     </div>
-
-
+    
+    
                     <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
@@ -115,7 +115,7 @@
                         </div>
                         <span class="itens__body__list__item__number">10</span>
                     </div>
-
+    
                 </div>
                 <div class="itens__body__list">
                     <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
@@ -125,7 +125,7 @@
                         </div>
                         <span class="itens__body__list__item__number">10</span>
                     </div>
-
+    
                     <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
@@ -133,7 +133,7 @@
                         </div>
                         <span class="itens__body__list__item__number">10</span>
                     </div>
-
+    
                     <div data-item-type="damage" class="itens__body__list__item itens__body__list__item-is--hidden">
                         <div class="itens__body__list__item__main">
                             <img class="itens__body__list__item__main__icon" src="https://placehold.co/20x20" alt="Ícone do item">
@@ -165,8 +165,8 @@
                 </div>
             </div>
         </div>
+    </div>
 
-    </main>
     <script src="/dist/scripts/index.min.js"></script>
     <script src="/dist/scripts/navegation.min.js"></script>
 </body>
