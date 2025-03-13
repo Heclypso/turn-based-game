@@ -253,6 +253,7 @@ for (let i = 0; i < skill.length; i++) {
             setTimeout(() => {
                 increseTurnCounter()
                 firstEnemy.getAttacked(allySkillsArray[i].damage);
+                enemy.classList.add('getAttacked')
                 showEnemyDamageIndicator(`${allySkillsArray[i].damage}`)
                 changeIdValue(`${indice}`)
                 createBattleLogContainer(`${idValue}-turn-container`, `${idValue}-turn-title`, `Turno ${turnCounter}`)
@@ -260,6 +261,7 @@ for (let i = 0; i < skill.length; i++) {
                 firstEnemy.updateHpBars();
                 firstEnemy.setCanAttack(true)
                 setTimeout(() => {
+                    enemy.classList.remove('getAttacked')
                     hideSkillsDisplay()
                     hideEnemyDamageIndicator()
                 }, 1500);
@@ -339,19 +341,21 @@ function changeTimerInnerText() {
                     showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
                     setTimeout(() => {
                         protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                        ally.classList.add('getAttacked')
                         createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `CPU usou ${enemySkillsArray[randomSkill].name}`, `${enemySkillsArray[randomSkill].damage} de dano`, true)
                         trySetSleepNegativeEffect('sleep')
                         showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
                         protagonist.updateHpBars();
                         firstEnemy.setCanAttack(false)
                         setTimeout(() => {
+                            ally.classList.remove('getAttacked')
                             hideSkillsDisplay()
                             hideAllyDamageIndicator()
                             changeTimerInnerText()
                             verifyNegativeEffect()
                         }, 1500);
                     }, 500);
-                    showAllysInfos()
+                    showAllysInfos()    
                 }
             }
         }, 1000);

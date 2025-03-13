@@ -1,0 +1,21 @@
+.getAttacked {
+    animation: getAttacked 0.2667s linear;
+}
+
+@keyframes getAttacked {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

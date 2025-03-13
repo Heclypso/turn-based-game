@@ -1,0 +1,101 @@
+@use './base/variables'; 
+
+.itens {
+    position: absolute;
+    top: 334px;
+    left: 213px;
+    height: 300px;
+    width: 648px;
+    display: none;
+
+    &--visible {
+        display: block;
+    }
+
+    &__header {
+        height: 62px;
+        background-color: variables.$primaryTransparentColor;
+        border: solid 5px variables.$primaryColor;
+        display: flex;
+        padding: 16px 24px;
+
+        &__tab {
+            color: variables.$primaryTextColor;
+            border: 1px solid transparent;
+            font-size: 18px;
+            width: 200px;
+            height: 24px;
+            text-align: center;
+
+            &--active {
+                background-color: variables.$activeTransparentColor;
+                border: 1px solid variables.$activeTransparentBorderColor;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    &__body {
+        height: 238px;
+        background-color: variables.$primaryTransparentColor;
+        border: solid 5px variables.$primaryColor;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+
+
+        &__list {
+            width: 264px;
+
+            &__item {
+                width: 243px;
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid transparent;
+
+                &:hover {
+                    background-color: variables.$activeTransparentColor;
+                    border: 1px solid variables.$activeTransparentBorderColor;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                &--selected {
+                    background-color: variables.$activeTransparentColor;
+                    border: 1px solid variables.$activeTransparentBorderColor;
+                    border-radius: 4px;
+                }
+
+                &--hidden {
+                    display: none;
+                }
+
+                &__main {
+                    display: flex;
+                    align-items: center;
+
+                    &__icon {
+                        width: 20px;
+                        height: 20px;
+                        border: 1px solid variables.$activeTransparentBorderColor;
+                        border-radius: 2px;
+                        margin: 8px;
+                    }
+
+                    &__name {
+                        color: variables.$primaryTextColor;
+                        font-size: 16px;
+                    }
+
+
+                }
+
+                &__number {
+                    color: variables.$primaryTextColor;
+                    font-size: 16px;
+                    margin: 8px;
+                }
+            }
+        }
+    }
+}
