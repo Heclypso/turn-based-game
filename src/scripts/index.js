@@ -1,3 +1,56 @@
+const battleLog = document.getElementById('log')
+
+// Função que cria um novo battle-log container 
+function createBattleLogContainer(containerId, titleId, turnValue) {
+    const newBattleLogContainer = document.createElement('div')
+    newBattleLogContainer.className = ('battle-log__container')
+    newBattleLogContainer.id = containerId;
+
+    const newBattleLogTitle = document.createElement('span')
+    newBattleLogTitle.className = ('battle-log__title')
+    newBattleLogTitle.innerText = turnValue;
+    newBattleLogTitle.id = titleId;
+    
+    battleLog.appendChild(newBattleLogContainer)
+    newBattleLogContainer.appendChild((newBattleLogTitle))
+}
+
+// Função que cria um novo item para o battle log container
+function createBattleLogItem(containerId, titleId, skillName, skillDamage, Reverse) {
+    const battleLogContainer = document.getElementById(containerId)
+    const BattleLogTitle = document.getElementById(titleId)
+
+    const newBattleLogItem = document.createElement('div')
+    newBattleLogItem.className = ('battle-log__item')
+
+    const newBattleLogSkillContainer = document.createElement('div')
+    newBattleLogSkillContainer.className = ('battle-log__skill-container')
+
+    const newBattleLogIcon = document.createElement('img')
+    newBattleLogIcon.className = ('battle-log__icon')
+    newBattleLogIcon.src = 'https://placehold.co/58x56'
+    newBattleLogIcon.alt = 'Ícone da habilidade'
+
+    const newBattleLogSkill = document.createElement('span')
+    newBattleLogSkill.className = ('battle-log__skill')
+    newBattleLogSkill.innerText = skillName;
+
+    const newBattleLogDamage = document.createElement('span')
+    newBattleLogDamage.className = ('battle-log__damage')
+    newBattleLogDamage.innerText = `- ${skillDamage}`;
+
+    battleLog.appendChild(battleLogContainer)
+    battleLogContainer.append(BattleLogTitle, newBattleLogItem)
+    newBattleLogItem.append(newBattleLogSkillContainer, newBattleLogDamage)
+    newBattleLogSkillContainer.append(newBattleLogIcon, newBattleLogSkill)
+
+    if (Reverse === true) {
+        newBattleLogItem.classList.add('battle-log__item--reverse')
+        newBattleLogSkillContainer.classList.add('battle-log__skill-container--reverse')
+        newBattleLogDamage.innerText = `${skillDamage} -`
+    }
+}
+
 const allyHpBar = document.getElementById('ally-hp-bar')
 const allyHpValue = document.getElementById('ally-hp-number')
 
@@ -13,9 +66,6 @@ class Character {
     constructor(characterName, characterSkills) {
         this.name = characterName;
         this.skill = characterSkills;
-    }
-    attack(selectedSkill, selectedSkillDamage) {
-        console.log(`${this.name} attacked with ${selectedSkill} e inflingiu ${selectedSkillDamage} de dano`)
     }
     getAttacked(enemyDamage) {
         this.#hp -= enemyDamage;
@@ -154,6 +204,31 @@ firstEnemy.setCanAttack(false)
 // Seleção de skill aleatoria para o inimigo (computador) atacar.
 const enemySkillsArray = [enemyPunch, enemyJab]
 
+let turnCounter = 0;
+
+function increseTurnCounter() {
+    return turnCounter += 1;
+}
+
+let indice = 0
+
+function increaseIndice() {
+    if (indice === 10) {
+        indice = 0
+    }
+    return indice += 1;
+}
+
+function changeIdValue(indice) {
+    const idArray = ['first', 'second', 'third', 'fourth' , 'fifith', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth']
+    increaseIndice()
+
+    for (let i = 0; i < idArray.length; i++) {
+        return idValue = (idArray[indice])
+    }
+
+}
+
 // Display de skills 
 const battleHud = document.getElementById('battle-hud')
 const battleHudContainer = document.getElementById('battle-hud-container')
@@ -176,9 +251,12 @@ for (let i = 0; i < skill.length; i++) {
             showSkillDisplay(`${allySkillsArray[i].name}`, '--ally')
             showSkills()
             setTimeout(() => {
-                protagonist.attack(allySkillsArray[i].name, allySkillsArray[i].damage);
+                increseTurnCounter()
                 firstEnemy.getAttacked(allySkillsArray[i].damage);
                 showEnemyDamageIndicator(`${allySkillsArray[i].damage}`)
+                changeIdValue(`${indice}`)
+                createBattleLogContainer(`${idValue}-turn-container`, `${idValue}-turn-title`, `Turno ${turnCounter}`)
+                createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `Você usou ${allySkillsArray[i].name}`, `${allySkillsArray[i].damage} de dano`, false)
                 firstEnemy.updateHpBars();
                 firstEnemy.setCanAttack(true)
                 setTimeout(() => {
@@ -260,8 +338,8 @@ function changeTimerInnerText() {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                     showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
                     setTimeout(() => {
-                        console.log(`${firstEnemy.name} attacked with ${enemySkillsArray[randomSkill].name} e inflingiu ${enemySkillsArray[randomSkill].damage}`)
                         protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                        createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `CPU usou ${enemySkillsArray[randomSkill].name}`, `${enemySkillsArray[randomSkill].damage} de dano`, true)
                         trySetSleepNegativeEffect('sleep')
                         showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
                         protagonist.updateHpBars();
@@ -285,10 +363,10 @@ changeTimerInnerText()
 // Função que tenta aplicar o efeito negativo de sleep
 function trySetSleepNegativeEffect(effect) {
     const number = Math.random()
+    console.log(number)
     if (number > 0.5) {
         protagonist.setNegativeEffect(`${effect}`)
     }
-    console.log(number)
 }
 
 const allyStatusContainer = document.getElementById('ally-status-container')
@@ -309,6 +387,7 @@ function verifyNegativeEffect() {
                 negativeStatusIcon.alt = 'Ícone do efeito'
 
                 allyStatusContainer.appendChild(negativeStatusIcon)
+                console.log("Você está dormindo")
                 }
             break;
         }
@@ -355,3 +434,5 @@ function showAllysInfos() {
 
 // protagonist.setCanAttack(false)
 // console.log(protagonist.getCanAttack())
+
+

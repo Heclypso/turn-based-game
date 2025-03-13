@@ -9,7 +9,7 @@ const rename = require('gulp-rename')
 
 function compilaSass() {
     return gulp.src('./src/styles/main.scss')
-    .pipe(sass()) 
+    .pipe(sass().on('error', sass.logError))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./dist/styles'))
