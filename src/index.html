@@ -11,16 +11,16 @@
 </head>
 <body>
     <div class="battle-stage">
-        <div id="battle-hud" class="battle-hud">
-            <div id="battle-hud-container" class="battle-hud__container"> 
-                <div id="enemy-name" class="battle-hud__display">Inimigo [inimigo]</div>
-                <span id="timer" class="battle-hud__timer"></span>
-                <div id="enemy-infos" class="battle-hud__infos">
-                    <div class="battle-hud__infos__container">
+        <div id="upper-bar" class="upper-bar">
+            <div id="upper-bar-container" class="upper-bar__container"> 
+                <div id="enemy-name" class="upper-bar__enemy-name">Inimigo [inimigo]</div>
+                <span id="timer" class="upper-bar__timer"></span>
+                <div id="enemy-infos" class="upper-bar__enemy-infos">
+                    <div class="upper-bar__enemy-infos-container">
                         <span>HP</span><span id="enemy-hp-number">100</span>
                     </div>
-                    <div class="battle-hud__hpbar">
-                        <div id="enemy-hp-bar" class="battle-hud__hpbar battle-hud__hpbar--full"></div>
+                    <div class="upper-bar__hpbar">
+                        <div id="enemy-hp-bar" class="upper-bar__hpbar upper-bar__hpbar--full"></div>
                     </div>
                 </div>
             </div>
@@ -40,11 +40,12 @@
 
         <div class="battle-menu">
             <div class="battle-menu__options">
-                <button data-button-name="options-button" id="attack-button" class="battle-menu__options__button battle-menu__options__button--active">Atacar</button>
-                <button data-button-name="options-button" id="itens-button" class="battle-menu__options__button">Itens</button>
-                <button data-button-name="options-button" id="group-button" class="battle-menu__options__button">Grupo</button>
-                <button data-button-name="options-button" id="log-button" class="battle-menu__options__button">Registro</button>
+                <button data-button-name="options-button" id="attack-button" class="battle-menu__button battle-menu__button--active">Atacar</button>
+                <button data-button-name="options-button" id="itens-button" class="battle-menu__button">Itens</button>
+                <button data-button-name="options-button" id="group-button" class="battle-menu__button">Grupo</button>
+                <button data-button-name="options-button" id="log-button" class="battle-menu__button">Registro</button>
             </div>
+            
             <div id="battle-infos" class="battle-menu__infos">
                 <div id="allys" class="battle-menu__infos__allys battle-menu__infos__allys--visible">
                     <span class="battle-menu__infos__allys__name">Você</span>
@@ -61,7 +62,7 @@
                 </div>
                 
                 <div id="skills" class="battle-menu__infos__skills">
-                    <button id="skill-button" class="battle-menu__infos__skills__container">
+                    <button class="battle-menu__infos__skills__container">
                         <div class="battle-menu__infos__skills__main">
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name"></span>
@@ -69,8 +70,8 @@
                         <span class="battle-menu__infos__skills__damage"></span>
                     </button>
 
-                    <button id="skill-button" class="battle-menu__infos__skills__container">
-                        <div id="skill-button" class="battle-menu__infos__skills__main">
+                    <button class="battle-menu__infos__skills__container">
+                        <div class="battle-menu__infos__skills__main">
                             <img class="battle-menu__infos__skills__icon" src="https://placehold.co/20x20" alt="Ícone da habilidade">
                             <span class="battle-menu__infos__skills__name"></span>
                         </div>

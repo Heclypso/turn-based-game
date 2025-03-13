@@ -230,15 +230,15 @@ function changeIdValue(indice) {
 }
 
 // Display de skills 
-const battleHud = document.getElementById('battle-hud')
-const battleHudContainer = document.getElementById('battle-hud-container')
+const upperBar = document.getElementById('upper-bar')
+const upperBarContainer = document.getElementById('upper-bar-container')
 const skillDisplay = document.getElementById('skill-display')
 const skillDisplayName = document.getElementById('skill-display-name')
 const skillDisplayIcon = document.getElementById('skill-display-icon')
 
 // Sistema do player escolher uma skill e atacar com ela
 const allySkillsArray = [allyPunch, allyJab]
-const skill = document.querySelectorAll('#skill-button')
+const skill = document.querySelectorAll('.battle-menu__infos__skills__container')
 const skillMenu = document.getElementById('skills')
 const allys = document.getElementById('allys')
 const allyDamageIndicator = document.getElementById('ally-damage-indicator')
@@ -277,19 +277,19 @@ function showSkills() {
 
 // Função que mostra o skill display
 function showSkillDisplay(name, theme) {
-    battleHud.classList.add('battle-hud--skill')
-    battleHudContainer.classList.add('battle-hud__container--hidden')
+    upperBar.classList.add('upper-bar--skill')
+    upperBarContainer.classList.add('upper-bar__container--hidden')
     skillDisplay.classList.remove('skill-display--hidden')
     skillDisplayName.innerText = name;
-    battleHud.classList.add(`battle-hud${theme}`)
+    upperBar.classList.add(`upper-bar${theme}`)
 }
 
 function hideSkillsDisplay() {
-    battleHud.classList.remove('battle-hud--skill')
-    battleHudContainer.classList.remove('battle-hud__container--hidden')
+    upperBar.classList.remove('upper-bar--skill')
+    upperBarContainer.classList.remove('upper-bar__container--hidden')
     skillDisplay.classList.add('skill-display--hidden')
-    battleHud.classList.remove(`battle-hud--ally`)
-    battleHud.classList.remove(`battle-hud--enemy`)
+    upperBar.classList.remove(`upper-bar--ally`)
+    upperBar.classList.remove(`upper-bar--enemy`)
 }
 
 // Função que mostra o damage indicator do inimigo
@@ -306,7 +306,6 @@ function hideEnemyDamageIndicator() {
         enemyDamageIndicator.style.bottom = '20%'
     }, 2500);
 }
-
 // Sistema de duração do turno e ataque da CPU
 function changeTimerInnerText() {
     if (protagonist.getHp() > 0 && enemyDamageIndicator.style.bottom != '20%' || document.getElementById('timer').innerText == '' && protagonist.getHp() > 0) {
@@ -330,6 +329,12 @@ function changeTimerInnerText() {
         
             if(secondsToEndTheTurn < 10) {
                 document.getElementById('timer').innerText = `00:0${minsToEndTheTurn}:0${secondsToEndTheTurn}`
+            }
+
+            if (timeLeftToEndTheTurn < 0) {
+                increseTurnCounter()
+                changeIdValue(`${indice}`)
+                createBattleLogContainer(`${idValue}-turn-container`, `${idValue}-turn-title`, `Turno ${turnCounter}`)
             }
         
             if (timeLeftToEndTheTurn < 0 || firstEnemy.getCanAttack() === true || protagonist.getCanAttack() === false) {
@@ -366,9 +371,9 @@ changeTimerInnerText()
 
 // Função que tenta aplicar o efeito negativo de sleep
 function trySetSleepNegativeEffect(effect) {
-    const number = Math.random()
+    const number = Math.round((Math.random() * 100))
     console.log(number)
-    if (number > 0.5) {
+    if (number < 50) {
         protagonist.setNegativeEffect(`${effect}`)
     }
 }

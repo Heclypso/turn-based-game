@@ -1,0 +1,21 @@
+@use './base/variables'; 
+
+.battle-menu {
+
+    &__button {
+        background-color: transparent;
+        border: 1px solid transparent;
+        color: variables.$primaryTextColor;
+        font-size: 16px;
+        line-height: 21px;
+        width: 167px;
+        height: 24px;
+        border-radius: 4px;
+
+        &--active {
+            background-color: variables.$activeTransparentColor;
+            border: 1px solid variables.$activeTransparentBorderColor;
+        }
+    }
+
+}

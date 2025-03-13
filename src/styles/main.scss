@@ -5,8 +5,9 @@
 @use './components//battle-log';
 @use './components/itens';
 @use './base/global';
+@use './components/buttons';
 
-.battle-hud {
+.upper-bar {
     height: 134px;
     width: 100%;
     background-color: variables.$primaryTransparentColor;
@@ -41,7 +42,7 @@
         border: 5px solid variables.$enemyColor;
     }
 
-    &__display {
+    &__enemy-name {
         color: variables.$primaryTextColor;
         font-size: 32px;
         line-height: 38px;
@@ -58,7 +59,7 @@
         left: 24px;
     }
 
-    &__infos {
+    &__enemy-infos {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -67,7 +68,7 @@
         margin-left: -20px;
         transition: 1s;
     
-        &__container {
+        &-container {
             display: flex;
             justify-content: space-between;
             width: 100%;
@@ -157,22 +158,6 @@
         border: solid 5px variables.$primaryColor;
         width: 213px;
         height: 134px;
-
-        &__button {
-            background-color: transparent;
-            border: 1px solid transparent;
-            color: variables.$primaryTextColor;
-            font-size: 16px;
-            line-height: 21px;
-            width: 167px;
-            height: 24px;
-            border-radius: 4px;
-
-            &--active {
-                background-color: variables.$activeTransparentColor;
-                border: 1px solid variables.$activeTransparentBorderColor;
-            }
-        }
     }
 
     &__infos {
