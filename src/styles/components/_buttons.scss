@@ -12,6 +12,11 @@
         height: 24px;
         border-radius: 4px;
 
+        &:hover {
+            background-color: variables.$activeTransparentColor;
+            border: 1px solid variables.$activeTransparentBorderColor;
+        }
+
         &--active {
             background-color: variables.$activeTransparentColor;
             border: 1px solid variables.$activeTransparentBorderColor;

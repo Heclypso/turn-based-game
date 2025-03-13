@@ -246,6 +246,11 @@
                 background-color: transparent;
                 border: 1px solid transparent;
 
+                &--active {
+                    background-color: variables.$activeTransparentColor;
+                    border: 1px solid variables.$activeTransparentBorderColor;
+                }
+
                 &:hover {
                     background-color: variables.$activeTransparentColor;
                     border: 1px solid variables.$activeTransparentBorderColor;

@@ -1,5 +1,5 @@
 // navegação do menu de combate
-const buttons = document.getElementsByTagName('button')
+const optionButtons = document.querySelectorAll(`[data-button-name="options-button"]`)
 const log = document.getElementById('log')
 const itemMenu = document.getElementById('itens')
 const allys = document.getElementById('allys')
@@ -12,45 +12,44 @@ const itensButton = document.getElementById('itens-button')
 const groupButton = document.getElementById('group-button')
 const logButton = document.getElementById('log-button')
 
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', function(){
-        if (enemy.style.opacity != '0' && ally.style.opacity != '0') {
-        switch(buttons[i].id) {
-            case ('attack-button'): 
-                removeAtiveOptions()
-                attackButton.classList.add('battle-menu__options__button--active')
-                allys.classList.remove('battle-menu__infos__allys--visible')
-                skills.classList.add('battle-menu__infos__skills--visible')
-            break;
+for (let i = 0; i < optionButtons.length; i++) {
+    optionButtons[i].addEventListener('click', function(){
+            if (enemy.style.opacity != '0' && ally.style.opacity != '0') {
+            switch(optionButtons[i].id) {
+                case ('attack-button'): 
+                    removeAtiveOptions()
+                    attackButton.classList.add('battle-menu__button--active')
+                    allys.classList.remove('battle-menu__infos__allys--visible')
+                    skills.classList.add('battle-menu__infos__skills--visible')
+                break;
 
-            case ('itens-button'): 
-                removeAtiveOptions()
-                itensButton.classList.add('battle-menu__options__button--active')
-                itemMenu.classList.toggle('itens--visible')
-            break;
+                case ('itens-button'): 
+                    removeAtiveOptions()
+                    itensButton.classList.add('battle-menu__button--active')
+                    itemMenu.classList.toggle('itens--visible')
+                break;
 
-            case ('group-button'): 
-                removeAtiveOptions()
-                groupButton.classList.add('battle-menu__options__button--active')
-                allys.classList.add('battle-menu__infos__allys--visible')
-                skills.classList.remove('battle-menu__infos__skills--visible')
-            break;
+                case ('group-button'): 
+                    removeAtiveOptions()
+                    groupButton.classList.add('battle-menu__button--active')
+                    allys.classList.add('battle-menu__infos__allys--visible')
+                    skills.classList.remove('battle-menu__infos__skills--visible')
+                break;
 
-            case ('log-button'): 
-                removeAtiveOptions()
-                logButton.classList.add('battle-menu__options__button--active')
-                log.classList.toggle('battle-log--visible')
-            break;
+                case ('log-button'): 
+                    removeAtiveOptions()
+                    logButton.classList.add('battle-menu__button--active')
+                    log.classList.toggle('battle-log--visible')
+                break;
+            }
         }
-    }
-    })
+    });
+    optionButtons[i].addEventListener('mouseenter', removeAtiveOptions); 
 }
 
-// sistema de seleção do menu de opções
-const optionButtons = document.querySelectorAll(`[data-button-name="options-button"]`)
-
+// Função de seleção do menu de opções
 function removeAtiveOptions() {
-    optionButtons.forEach(item => item.classList.remove('battle-menu__options__button--active'))
+    optionButtons.forEach(item => item.classList.remove('battle-menu__button--active'))
 }
 
 // navegação do menu de itens

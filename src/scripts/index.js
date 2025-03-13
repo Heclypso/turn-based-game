@@ -229,7 +229,7 @@ function changeIdValue(indice) {
 
 }
 
-// Display de skills 
+// Display de skills na upperbar
 const upperBar = document.getElementById('upper-bar')
 const upperBarContainer = document.getElementById('upper-bar-container')
 const skillDisplay = document.getElementById('skill-display')
@@ -244,6 +244,18 @@ const allys = document.getElementById('allys')
 const allyDamageIndicator = document.getElementById('ally-damage-indicator')
 const enemyDamageIndicator = document.getElementById('enemy-damage-indicator')
 const skills = document.getElementById('skills')
+
+// Função que aplica active no primeiro item das skills
+function activeSkillsFirstChild() {
+    skill[0].classList.add('battle-menu__infos__skills__container--active')
+}
+
+activeSkillsFirstChild()
+
+// Função que remove o active do primeiro item das skills quando outra é hovered
+function removeActiveSkillsFirstChild() {
+    skill[0].classList.remove('battle-menu__infos__skills__container--active')
+}
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
@@ -268,6 +280,7 @@ for (let i = 0; i < skill.length; i++) {
             }, 500);
         }
     })
+    skill[i].addEventListener('mouseenter', removeActiveSkillsFirstChild)
 }
 
 // Função que mostra as opções de skills
