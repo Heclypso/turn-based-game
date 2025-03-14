@@ -388,7 +388,7 @@ changeTimerInnerText()
 // Função que tenta aplicar o efeito negativo de sleep
 function trySetSleepNegativeEffect(effect) {
     if (protagonist.getNegativeEffect() === 'sleep') {
-        
+
     } else {
         const number = Math.round((Math.random() * 100))
         console.log(number)
@@ -494,9 +494,9 @@ function setResultScreenValues(damageDealt, damageRecieved, itensCount, enemiesK
 // const resultsScreenPlayer = document.getElementById('results-screen-player')
 // const resultsScreenMessage = document.getElementById('results-screen-message')
 
-// const playAgainButton = document.getElementById('play-again').addEventListener('click', function(){
-
-// });
+const playAgainButton = document.getElementById('play-again').addEventListener('click', function(){
+    location.reload();
+});
 
 // protagonist.setCanAttack(false)
 // console.log(protagonist.getCanAttack())
