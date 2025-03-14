@@ -443,6 +443,7 @@ function hideAllyDamageIndicator() {
 
 // Função que mostra as informações dos aliados na party 
 function showAllysInfos() {
+    skills.classList.remove('battle-menu__infos__skills--visible')
     allys.classList.add('battle-menu__infos__allys--visible')
 }
 
@@ -452,7 +453,9 @@ function showAllysInfos() {
 // const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
 // const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
 // const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
-// const playAgainButton = document.getElementById('play-again');
+// const playAgainButton = document.getElementById('play-again').addEventListener('click', function(){
+
+// });
 
 // protagonist.setCanAttack(false)
 // console.log(protagonist.getCanAttack())
