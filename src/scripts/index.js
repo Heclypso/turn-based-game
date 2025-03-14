@@ -153,6 +153,7 @@ class Enemy extends Character {
         enemyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
+            setResultScreenValues(0, 0, 0, 1)
             protagonist.setCanAttack(false)
             firstEnemy.setCanAttack(false)
             victory()
@@ -265,6 +266,7 @@ for (let i = 0; i < skill.length; i++) {
             setTimeout(() => {
                 increseTurnCounter()
                 firstEnemy.getAttacked(allySkillsArray[i].damage);
+                setResultScreenValues(allySkillsArray[i].damage, 0, 0, 0)
                 enemy.classList.add('getAttacked')
                 showEnemyDamageIndicator(`${allySkillsArray[i].damage}`)
                 changeIdValue(`${indice}`)
@@ -359,6 +361,7 @@ function changeTimerInnerText() {
                     showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
                     setTimeout(() => {
                         protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
+                        setResultScreenValues(0, enemySkillsArray[randomSkill].damage, 0, 0)
                         ally.classList.add('getAttacked')
                         createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `CPU usou ${enemySkillsArray[randomSkill].name}`, `${enemySkillsArray[randomSkill].damage} de dano`, true)
                         trySetSleepNegativeEffect('sleep')
@@ -384,10 +387,14 @@ changeTimerInnerText()
 
 // Função que tenta aplicar o efeito negativo de sleep
 function trySetSleepNegativeEffect(effect) {
-    const number = Math.round((Math.random() * 100))
-    console.log(number)
-    if (number < 50) {
-        protagonist.setNegativeEffect(`${effect}`)
+    if (protagonist.getNegativeEffect() === 'sleep') {
+        
+    } else {
+        const number = Math.round((Math.random() * 100))
+        console.log(number)
+        if (number < 50) {
+            protagonist.setNegativeEffect(`${effect}`)
+        }
     }
 }
 
@@ -424,6 +431,8 @@ function removeNegativeStatus() {
         const negativeStatusIcon = document.getElementById('negative-status-icon')
         allyStatusContainer.removeChild(negativeStatusIcon)
     }
+    protagonist.setNegativeEffect('none')
+    console.log(protagonist.getNegativeEffect())
 }
 
 // Função que mostra o damage indicator do aliado
@@ -447,12 +456,44 @@ function showAllysInfos() {
     allys.classList.add('battle-menu__infos__allys--visible')
 }
 
+const resultsScreenDamageDealt = document.getElementById('results-screen-damage-dealt')
+const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
+const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
+const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
+
+let allyDamageDealt = 0;
+let allyDamageRecieved = 0;
+let allyItensCount = 0;
+let allyEnemiesKilled = 0;
+
+function setResultScreenValues(damageDealt, damageRecieved, itensCount, enemiesKilled,) {
+
+    if (damageDealt > 0) {
+        allyDamageDealt += damageDealt;
+        resultsScreenDamageDealt.innerText = `Dano causado: ${allyDamageDealt}`;
+    }
+
+    if (damageRecieved > 0) {
+        allyDamageRecieved += damageRecieved;
+        resultsScreenDamageReceived.innerText = `Dano recebido: ${allyDamageRecieved}`;
+    }
+
+    if (itensCount > 0) {
+        allyItensCount += itensCount;
+        resultsScreenItensCount.innerText = `Itens utilizados: ${allyItensCount}`;
+    }
+
+    if (enemiesKilled > 0) {
+        allyEnemiesKilled += enemiesKilled;
+        resultsScreenEnemiesKilled.innerText = `Inimigos derrotados: ${allyEnemiesKilled}`;
+    }
+}
+
+// setResultScreenValues(0, 0, itens, 0)
+
 // const resultsScreenPlayer = document.getElementById('results-screen-player')
 // const resultsScreenMessage = document.getElementById('results-screen-message')
-// const resultsScreenDamageDealt = document.getElementById('results-screen-damage-dealt')
-// const resultsScreenDamageReceived = document.getElementById('results-screen-damage-received')
-// const resultsScreenItensCount = document.getElementById('results-screen-itens-count')
-// const resultsScreenEnemiesKilled = document.getElementById('results-screen-enemies-killed')
+
 // const playAgainButton = document.getElementById('play-again').addEventListener('click', function(){
 
 // });
