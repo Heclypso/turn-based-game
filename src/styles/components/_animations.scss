@@ -2,6 +2,10 @@
     animation: getAttacked 0.2667s linear;
 }
 
+.enemyAttack {
+    animation: enemyAttack .5s linear;
+}
+
 @keyframes getAttacked {
     0% {
         opacity: 0;
@@ -17,5 +21,23 @@
 
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes enemyAttack {
+    0% {
+        top: 20%;
+        left: -25%;
+    }
+
+    50% {
+        top: 40%;
+        left: -140%;
+        transform: rotateZ(-45deg);
+    }
+
+    100% {
+        top: 20%;
+        left: -25%;
     }
 }

@@ -329,6 +329,17 @@ function hideEnemyDamageIndicator() {
         enemyDamageIndicator.style.bottom = '20%'
     }, 2500);
 }
+
+const enemyWeapon = document.getElementById('enemy-weapon')
+
+// Função que adiciona e remove a animação de atacar da arma do inimigo
+function setWeaponAnimation() {
+    enemyWeapon.classList.add('enemyAttack')
+    setTimeout(() => {
+        enemyWeapon.classList.remove('enemyAttack')
+    }, 2000);
+}
+
 // Sistema de duração do turno e ataque da CPU
 function changeTimerInnerText() {
     if (protagonist.getHp() > 0 && enemyDamageIndicator.style.bottom != '20%' || document.getElementById('timer').innerText == '' && protagonist.getHp() > 0) {
@@ -367,6 +378,7 @@ function changeTimerInnerText() {
                 if(exiled.getHp() > 0 && protagonist.getHp() > 0) {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                     showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
+                    setWeaponAnimation()
                     setTimeout(() => {
                         protagonist.getAttacked(enemySkillsArray[randomSkill].damage);
                         setResultScreenValues(0, enemySkillsArray[randomSkill].damage, 0, 0)

@@ -111,6 +111,7 @@
         height: 200px;
         position: absolute; 
         transition: .5s;
+        z-index: 1;
 
         &:first-child {
             background-image: url('https://servidor-estatico-alpha-six.vercel.app/protagonist.png');
@@ -171,6 +172,7 @@
             position: absolute;
             top: 20%;
             left: -25%;
+            z-index: 0;
         }
 
         &__damage-indicator {
