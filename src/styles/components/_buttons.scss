@@ -1,5 +1,29 @@
 @use './base/variables'; 
 
+.menu {
+    &__button {
+        font-size: 20px;
+        width: 360px;
+        height: 60px;
+        background-color: variables.$activeTransparentColor;
+        border: 1px solid variables.$activeTransparentBorderColor;
+        color: variables.$primaryTextColor;
+    }
+}
+
+.form {
+
+    &__button {
+        width: 360px;
+        height: 60px;
+        background-color: transparent;
+        border: 1px solid variables.$activeTransparentBorderColor;
+        border-radius: 5px;
+        font-size: 24px;
+        color: variables.$primaryTextColor;
+    }
+}
+
 .battle-menu {
 
     &__button {
