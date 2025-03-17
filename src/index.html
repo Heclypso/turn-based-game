@@ -31,11 +31,20 @@
             </div>            
         </div>
 
-        <div id="ally" class="battle-stage__ally">
-            <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator"></span>
-        </div>
-        <div id="enemy" class="battle-stage__enemy">
-            <span id="enemy-damage-indicator" class="battle-stage__enemy__damage-indicator"></span>
+        <div class="battle-stage__container">
+            <div id="ally" class="battle-stage__ally">
+                <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator"></span>
+            </div>
+    
+            <!-- <div id="ally" class="battle-stage__ally">
+                <span id="ally-damage-indicator" class="battle-stage__ally__damage-indicator"></span>
+                <img id="ally-weapon" class="battle-stage__ally__weapon" src="https://servidor-estatico-alpha-six.vercel.app/exiled_weapon_combat.png" alt="">
+            </div> -->
+    
+            <div id="enemy" class="battle-stage__enemy">
+                <span id="enemy-damage-indicator" class="battle-stage__enemy__damage-indicator"></span>
+                <img id="enemy-weapon" class="battle-stage__enemy__weapon" src="https://servidor-estatico-alpha-six.vercel.app/exiled_weapon_combat.png" alt="">
+            </div>
         </div>
 
         <div class="battle-menu">
@@ -170,9 +179,9 @@
                             <span id="results-screen-enemies-killed" class="results-screen__container__content__body__list__item">Inimigos derrotados: 0</span>
                         </div>
                     </div>
-                    <button id="play-again" class="results-screen__container__content__button">Jogar de novo</button>
                 </div>
             </div>
+            <button id="play-again" class="results-screen__container__content__button">Jogar de novo</button>
         </div>
     </div>
 

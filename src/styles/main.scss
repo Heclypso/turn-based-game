@@ -21,6 +21,9 @@
     left: 0;
 
     &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         
         &--hidden {
             display: none;
@@ -46,12 +49,12 @@
         color: variables.$primaryTextColor;
         font-size: 32px;
         line-height: 38px;
-        margin-left: -20px;
         transition: .5s;
+        text-align: center;
     }
 
     &__timer {
-        color: variables.$primaryTextColor;
+        color: variables.$primaryColor;
         font-size: 32px;
         line-height: 38px;
         position: absolute;
@@ -65,7 +68,6 @@
         justify-content: center;
         align-items: center;
         width: 249.77px;
-        margin-left: -20px;
         transition: 1s;
     
         &-container {
@@ -93,43 +95,83 @@
 
 .battle-stage {
     margin: 0 auto;
-    background-image: url('https://servidor-estatico-alpha-six.vercel.app/turn-based-game-background.jpg');
-    background-size: cover;
-    width: 1366px;
+    width: 861px;
     height: 768px;
     position: relative;
 
+    &__container {
+        background-image: url('https://servidor-estatico-alpha-six.vercel.app/game-background-image.png');
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+    }
+
     &__ally {
-        background-color: variables.$allyColor;
-        width: 187px;
-        height: 180px;
-        position: absolute;
-        top: 495px;
-        left: 122px;
+        width: 171.5px;
+        height: 200px;
+        position: absolute; 
         transition: .5s;
 
+        &:first-child {
+            background-image: url('https://servidor-estatico-alpha-six.vercel.app/protagonist.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            top: 367px;
+            left: 107px;
+        }
+
+        &:nth-child(2) {
+            background-image: url('https://servidor-estatico-alpha-six.vercel.app/protagonist.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            top: 434px;
+            left: 297px;
+        }
+
+        &__weapon {
+            position: absolute;
+            top: 20%;
+            right: -25%;
+            transform: rotateY(180deg)
+        }
+
         &__damage-indicator {
-            color: variables.$primaryTextColor;
             font-size: 32px;
             position: absolute;
-            bottom: 1;
-            right: 0;
             opacity: 0;
             transition: .5s;
+
+            &:first-child {
+                color: variables.$primaryColor;
+                bottom: 1;
+                left: 0;
+            }
+
+            // &:nth-child(2) {
+
+            // }
         }
     }
 
     &__enemy {
-        background-color: variables.$enemyColor;
-        width: 140px;
-        height: 176px;
+        background-image: url('https://servidor-estatico-alpha-six.vercel.app/exiled_sprite_combat.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 171.5px;
+        height: 200px;
         position: absolute;
-        top: 332px;
-        left: 593px;
+        top: 284px; 
+        left: 489px;
         opacity: 1;
         transition: .5s;
         display: flex;
         justify-content: center;
+
+        &__weapon {
+            position: absolute;
+            top: 20%;
+            left: -25%;
+        }
 
         &__damage-indicator {
             color: variables.$primaryTextColor;

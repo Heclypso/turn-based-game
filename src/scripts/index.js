@@ -111,7 +111,7 @@ class Ally extends Character  {
         allyHpValue.innerHTML = this.getHp();
 
         if (this.getHp() <= 0) {
-            firstEnemy.setCanAttack(false)
+            exiled.setCanAttack(false)
             protagonist.setCanAttack(false)
             defeat()
         }
@@ -155,7 +155,7 @@ class Enemy extends Character {
         if (this.getHp() <= 0) {
             setResultScreenValues(0, 0, 0, 1)
             protagonist.setCanAttack(false)
-            firstEnemy.setCanAttack(false)
+            exiled.setCanAttack(false)
             victory()
         }
     }
@@ -199,11 +199,19 @@ const enemyJab = new EnemySkills('Jab', 30, 10)
 
 // Definição da instancia dos personagens
 const protagonist = new Ally('Protagonist', [allyPunch, allyJab]);
-const firstEnemy = new Enemy('Enemy', [enemyPunch, enemyJab])
-firstEnemy.setCanAttack(false)
+const exiled = new Enemy('Exilado', [enemyPunch, enemyJab])
+exiled.setCanAttack(false)
+
 
 // Seleção de skill aleatoria para o inimigo (computador) atacar.
 const enemySkillsArray = [enemyPunch, enemyJab]
+
+// Função que seta o conteúdo do enemyName
+function setEnemyNameDisplay(name) {
+    enemyName.innerText = `Ovo [${name}]`
+}
+
+setEnemyNameDisplay(`${exiled.name}`)
 
 let turnCounter = 0;
 
@@ -260,20 +268,20 @@ function removeActiveSkillsFirstChild() {
 
 for (let i = 0; i < skill.length; i++) {
     skill[i].addEventListener('click', function(){
-        if (protagonist.getHp() > 0 && firstEnemy.getHp() > 0 && protagonist.getCanAttack() === true && document.getElementById('timer').innerText != '') {
+        if (protagonist.getHp() > 0 && exiled.getHp() > 0 && protagonist.getCanAttack() === true && document.getElementById('timer').innerText != '') {
             showSkillDisplay(`${allySkillsArray[i].name}`, '--ally')
             showSkills()
             setTimeout(() => {
                 increseTurnCounter()
-                firstEnemy.getAttacked(allySkillsArray[i].damage);
+                exiled.getAttacked(allySkillsArray[i].damage);
                 setResultScreenValues(allySkillsArray[i].damage, 0, 0, 0)
                 enemy.classList.add('getAttacked')
                 showEnemyDamageIndicator(`${allySkillsArray[i].damage}`)
                 changeIdValue(`${indice}`)
                 createBattleLogContainer(`${idValue}-turn-container`, `${idValue}-turn-title`, `Turno ${turnCounter}`)
                 createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `Você usou ${allySkillsArray[i].name}`, `${allySkillsArray[i].damage} de dano`, false)
-                firstEnemy.updateHpBars();
-                firstEnemy.setCanAttack(true)
+                exiled.updateHpBars();
+                exiled.setCanAttack(true)
                 setTimeout(() => {
                     enemy.classList.remove('getAttacked')
                     hideSkillsDisplay()
@@ -352,11 +360,11 @@ function changeTimerInnerText() {
                 createBattleLogContainer(`${idValue}-turn-container`, `${idValue}-turn-title`, `Turno ${turnCounter}`)
             }
         
-            if (timeLeftToEndTheTurn < 0 || firstEnemy.getCanAttack() === true || protagonist.getCanAttack() === false) {
+            if (timeLeftToEndTheTurn < 0 || exiled.getCanAttack() === true || protagonist.getCanAttack() === false) {
                 clearInterval(timeCounter)
                 document.getElementById('timer').innerText = ''
 
-                if(firstEnemy.getHp() > 0 && protagonist.getHp() > 0) {
+                if(exiled.getHp() > 0 && protagonist.getHp() > 0) {
                     const randomSkill = Math.floor(Math.random() * enemySkillsArray.length)
                     showSkillDisplay(`${enemySkillsArray[randomSkill].name}`, '--enemy')
                     setTimeout(() => {
@@ -367,7 +375,7 @@ function changeTimerInnerText() {
                         trySetSleepNegativeEffect('sleep')
                         showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
                         protagonist.updateHpBars();
-                        firstEnemy.setCanAttack(false)
+                        exiled.setCanAttack(false)
                         setTimeout(() => {
                             ally.classList.remove('getAttacked')
                             hideSkillsDisplay()
@@ -439,14 +447,14 @@ function removeNegativeStatus() {
 function showAllyDamageIndicator(damage) {
     allyDamageIndicator.innerHTML = damage
     allyDamageIndicator.style.opacity = '1'
-    allyDamageIndicator.style.right = '-30%'
+    allyDamageIndicator.style.left = '-30%'
 }
 
 // Função que esconde o damage indicator do aliado
 function hideAllyDamageIndicator() {
     allyDamageIndicator.style.opacity = '0'
     setTimeout(() => {
-        allyDamageIndicator.style.right = '0'
+        allyDamageIndicator.style.left = '0'
     }, 1500);
 }
 

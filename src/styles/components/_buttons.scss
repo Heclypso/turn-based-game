@@ -24,3 +24,22 @@
     }
 
 }
+
+.results-screen {
+
+    &__container {
+
+        &__content {
+
+            &__button {
+                width: 234px;
+                height: 43px;
+                font-size: 24px;
+                background-color: variables.$activeTransparentColor;
+                border: 1px solid variables.$activeTransparentBorderColor;
+                color: variables.$primaryTextColor;
+                border-radius: 4px;
+            }
+        }
+    }
+}
