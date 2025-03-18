@@ -16,9 +16,14 @@
     background-color: variables.$primaryTransparentColor;
     border: 5px solid variables.$primaryColor;
     position: relative;
+    overflow: hidden;
 
     &--battle {
         background-color: transparent;
         border: none;
+    }
+
+    &--hidden {
+        display: none;
     }
 }

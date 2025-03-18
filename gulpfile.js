@@ -36,7 +36,7 @@ module.exports = {
   };
 
 gulp.task('watch', (done) => {
-    watch('./src/styles/*.scss', {ignoreInitial: false}, gulp.series(compilaSass)), 
+    watch('./src/**/*.scss', {ignoreInitial: false}, gulp.series(compilaSass)), 
     watch('./src/*.html', {ignoreInitial: false}, gulp.series(comprimeHtml)),
     watch('./src/scripts/*.js', {ignoreInitial: false}, gulp.series(comprimeJavaScript));
     done();

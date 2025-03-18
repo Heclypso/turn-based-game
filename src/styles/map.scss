@@ -1,0 +1,112 @@
+@use './base/variables';
+
+.map {
+    width: 100%;
+    height: 100%;
+    background-color: #dfdfdf;
+
+    &--hidden {
+        display: none;
+    }
+
+    &__list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 271px;
+        height: 64px;
+        background-color: variables.$primaryTransparentColor;
+        border: 5px solid variables.$primaryColor;
+        border-radius: 0px 10px 10px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    &__item {
+        width: 248px;
+        height: 36px;
+        background-color: variables.$activeTransparentColor;
+        border: 1px solid variables.$activeTransparentBorderColor;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        z-index: 1;
+    }
+
+    &__item-name {
+        font-size: 18px;
+        color: variables.$primaryTextColor;
+    }
+
+    &__item-stats {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item-label {
+        font-size: 12px;
+        color: variables.$primaryTextColor;
+    }
+
+    &__item-value {
+        font-size: 12px;
+        color: variables.$primaryTextColor;
+    }
+
+    &__item-hp {
+        display: flex;
+        justify-content: space-between;
+        width: 115px;
+    }
+
+    &__item-hpbar {
+        width: 114px;
+        height: 8px;
+        background-color: variables.$hpBarEmptyBackgroundColor;
+
+        &--full {
+            background-color: variables.$hpBarFullBackgroundColor;
+        }
+    }
+
+    &__options {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 194px;
+        height: 66px;
+        background-color: variables.$primaryTransparentColor;
+        border-width: 0px 5px 5px 5px;
+        border-style: solid;
+        border-color: variables.$primaryColor;
+        border-radius: 0px 0px 10px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    &__main {
+
+    }
+
+    &__player {
+        position: absolute;
+        left: 388px;
+        top: 334px;
+        z-index: 0;
+    }
+
+    &__enemy {
+        position: absolute;
+        left: 597px;
+        top: 334px;
+    }
+}
+

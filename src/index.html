@@ -35,6 +35,32 @@
             </div>
             <button id="submit-button" class="form__button" type="submit">Continuar</button>
         </form>
+
+        <div id="map" class="map map--hidden">
+            <div class="map__list">
+                <div class="map__item">
+                    <span class="map__item-name">Você</span>
+                    <div class="map__item-stats">
+                        <div class="map__item-hp">
+                            <span class="map__item-label">HP</span>
+                            <span class="map__item-value">100</span>
+                        </div>
+                        <div class="map__item-hpbar">
+                            <div class="map__item-hpbar map__item-hpbar--full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="map__options">
+                <button class="map__button map__button--active">Itens</button>
+                <button class="map__button">Registro</button>
+            </div>
+            <div class="map__main">
+                <img id="player" class="map__player" src="https://servidor-estatico-alpha-six.vercel.app/player-left.png" alt="">
+                <img id="map-enemy" class="map__enemy" src="https://servidor-estatico-alpha-six.vercel.app/map-enemy.png" alt="">
+            </div>
+        </div>
     
         <div id="battle-stage" class="battle-stage battle-stage--hidden">
             <div id="upper-bar" class="upper-bar">
@@ -214,6 +240,7 @@
 
     <script src="/dist/scripts/menu.min.js"></script>
     <script src="/dist/scripts/form.min.js" ></script>
+    <script src="/dist/scripts/map.min.js"></script>
     <script src="/dist/scripts/index.min.js"></script>
     <script src="/dist/scripts/navegation.min.js"></script>
 </body>

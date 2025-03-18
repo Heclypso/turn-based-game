@@ -1,6 +1,7 @@
 const form = document.getElementById('form')
 const battleStage = document.getElementById('battle-stage')
 const container = document.getElementById('container')
+const map = document.getElementById('map')
 
 const button = document.getElementById('submit-button');
 button.addEventListener('click', (e) => {
@@ -13,7 +14,8 @@ button.addEventListener('click', (e) => {
 function startGame() {
     form.classList.add('form--hidden')
     container.classList.add('container--battle')
-    battleStage.classList.remove('battle-stage--hidden')
+    // battleStage.classList.remove('battle-stage--hidden')
+    map.classList.remove('map--hidden')
 }
 
 // Função que recupera o valor do nome do player

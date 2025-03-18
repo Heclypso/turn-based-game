@@ -384,7 +384,7 @@ function changeTimerInnerText() {
                         setResultScreenValues(0, enemySkillsArray[randomSkill].damage, 0, 0)
                         ally.classList.add('getAttacked')
                         createBattleLogItem(`${idValue}-turn-container`, `${idValue}-turn-title`, `CPU usou ${enemySkillsArray[randomSkill].name}`, `${enemySkillsArray[randomSkill].damage} de dano`, true)
-                        trySetSleepNegativeEffect('sleep')
+                        trySetStunNegativeEffect('stun')
                         showAllyDamageIndicator(`${enemySkillsArray[randomSkill].damage}`)
                         protagonist.updateHpBars();
                         exiled.setCanAttack(false)
@@ -405,14 +405,13 @@ function changeTimerInnerText() {
 
 changeTimerInnerText()
 
-// Função que tenta aplicar o efeito negativo de sleep
-function trySetSleepNegativeEffect(effect) {
-    if (protagonist.getNegativeEffect() === 'sleep') {
+// Função que tenta aplicar o efeito negativo de stun
+function trySetStunNegativeEffect(effect) {
+    if (protagonist.getNegativeEffect() === 'stun') {
 
     } else {
         const number = Math.round((Math.random() * 100))
-        console.log(number)
-        if (number < 50) {
+        if (number < 50 && protagonist.getHp() > 0) {
             protagonist.setNegativeEffect(`${effect}`)
         }
     }
@@ -423,7 +422,7 @@ const allyStatusContainer = document.getElementById('ally-status-container')
 function verifyNegativeEffect() {
     if (protagonist.getNegativeEffect() != 'none') {
         switch (protagonist.getNegativeEffect()) {
-            case ('sleep'):
+            case ('stun'):
                 protagonist.setCanAttack(false);
 
                 const negativeStatusIcon = document.createElement('img');
@@ -432,11 +431,10 @@ function verifyNegativeEffect() {
                 } else {
                 negativeStatusIcon.className = ('battle-menu__infos__allys__effect-icon')
                 negativeStatusIcon.id = 'negative-status-icon'
-                negativeStatusIcon.src = 'https://placehold.co/26x24'
+                negativeStatusIcon.src = 'https://servidor-estatico-alpha-six.vercel.app/stun-effect-icon.png'
                 negativeStatusIcon.alt = 'Ícone do efeito'
 
                 allyStatusContainer.appendChild(negativeStatusIcon)
-                console.log("Você está dormindo")
                 }
             break;
         }
@@ -452,7 +450,6 @@ function removeNegativeStatus() {
         allyStatusContainer.removeChild(negativeStatusIcon)
     }
     protagonist.setNegativeEffect('none')
-    console.log(protagonist.getNegativeEffect())
 }
 
 // Função que mostra o damage indicator do aliado

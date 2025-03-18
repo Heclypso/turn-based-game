@@ -67,3 +67,22 @@
         }
     }
 }
+
+.map {
+
+    &__button {
+        width: 167px;
+        height: 24px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: variables.$primaryTextColor;
+        font-size: 18px;
+
+        &--active {
+            background-color: variables.$activeTransparentColor;
+            border: 1px solid variables.$activeTransparentBorderColor;
+        }
+    }
+    
+}
