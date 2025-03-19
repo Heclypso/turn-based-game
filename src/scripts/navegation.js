@@ -13,7 +13,7 @@ const groupButton = document.getElementById('group-button')
 const logButton = document.getElementById('log-button')
 
 for (let i = 0; i < optionButtons.length; i++) {
-    optionButtons[i].addEventListener('click', function(){
+    optionButtons[i].addEventListener('click', () => {
             if (enemy.style.opacity != '0' && ally.style.opacity != '0') {
             switch(optionButtons[i].id) {
                 case ('attack-button'): 
@@ -56,7 +56,7 @@ function removeAtiveOptions() {
 const itemListItem = document.querySelectorAll('.itens__body__list__item')
 
 for (let i = 0; i < itemListItem.length; i++) {
-    itemListItem[i].addEventListener('click', function(){
+    itemListItem[i].addEventListener('click', () => {
         removeActiveItens()
         itemListItem[i].classList.add('itens__body__list__item--selected')
     })
@@ -72,7 +72,7 @@ function removeActiveItens() {
 const itemTab = document.querySelectorAll('.itens__header__tab')
 
 for (let i = 0; i < itemTab.length; i++) {
-    itemTab[i].addEventListener('click', function(){
+    itemTab[i].addEventListener('click', () => {
         removeAtiveTabs()
         itemTab[i].classList.add('itens__header__tab--active')
     })

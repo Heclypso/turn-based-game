@@ -1,5 +1,4 @@
 const form = document.getElementById('form')
-const battleStage = document.getElementById('battle-stage')
 const container = document.getElementById('container')
 const map = document.getElementById('map')
 
@@ -11,15 +10,14 @@ button.addEventListener('click', (e) => {
 });
 
 // Função que inicia o jogo
-function startGame() {
+const startGame = () => {
     form.classList.add('form--hidden')
     container.classList.add('container--battle')
-    // battleStage.classList.remove('battle-stage--hidden')
     map.classList.remove('map--hidden')
 }
 
 // Função que recupera o valor do nome do player
-function getPlayerName() {
+const getPlayerName = () => {
     const playerName = document.querySelector('#input-name').value
     return playerName;
 }

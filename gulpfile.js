@@ -9,6 +9,7 @@ const rename = require('gulp-rename')
 
 function compilaSass() {
     return gulp.src('./src/styles/main.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./maps'))
@@ -30,14 +31,13 @@ function comprimeJavaScript(){
     .pipe(gulp.dest('dist/scripts'))
 }
 
+function watchFiles() {
+    gulp.watch('./src/**/*.scss', {ignoreInitial: false}, gulp.series(compilaSass))
+    gulp.watch('./src/*.html', {ignoreInitial: false}, gulp.series(comprimeHtml))
+    gulp.watch('./src/scripts/*.js', {ignoreInitial: false}, gulp.series(comprimeJavaScript))
+}
 
-module.exports = {
-    default: gulp.series(compilaSass, comprimeHtml, comprimeJavaScript)
-  };
+exports.default = gulp.series(compilaSass, comprimeHtml, comprimeJavaScript)
+exports.watch = watchFiles;
 
-gulp.task('watch', (done) => {
-    watch('./src/**/*.scss', {ignoreInitial: false}, gulp.series(compilaSass)), 
-    watch('./src/*.html', {ignoreInitial: false}, gulp.series(comprimeHtml)),
-    watch('./src/scripts/*.js', {ignoreInitial: false}, gulp.series(comprimeJavaScript));
-    done();
-});
+
