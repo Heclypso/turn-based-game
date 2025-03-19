@@ -32,9 +32,9 @@ function comprimeJavaScript(){
 }
 
 function watchFiles() {
-    gulp.watch('./src/**/*.scss', {ignoreInitial: false}, gulp.series(compilaSass))
-    gulp.watch('./src/*.html', {ignoreInitial: false}, gulp.series(comprimeHtml))
-    gulp.watch('./src/scripts/*.js', {ignoreInitial: false}, gulp.series(comprimeJavaScript))
+    gulp.watch('./src/**/*.scss', {ignoreInitial: false}, compilaSass)
+    gulp.watch('./src/*.html', {ignoreInitial: false}, comprimeHtml)
+    gulp.watch('./src/scripts/*.js', {ignoreInitial: false}, comprimeJavaScript)
 }
 
 exports.default = gulp.series(compilaSass, comprimeHtml, comprimeJavaScript)
